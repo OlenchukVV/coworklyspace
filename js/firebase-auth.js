@@ -1,11 +1,11 @@
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+    apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
+    authDomain: "coworklyspace.firebaseapp.com",
+    projectId: "coworklyspace",
+    storageBucket: "coworklyspace.appspot.com",
+    messagingSenderId: "1039847178271",
+    appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
 };
 
 firebase.initializeApp(firebaseConfig);
