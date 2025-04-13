@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Кабінет користувача | CoworklySpace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/dashboard.css">
+  <script type="module" src="js/dashboard-auth.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Мій кабінет</h1>
+      <button id="logoutBtn">Вийти</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="user-info">
+      <h2>Вітаємо, <span id="userEmail">користувач</span></h2>
+    </section>
+
+    <section class="booking-history">
+      <h3>Мої бронювання</h3>
+      <ul id="bookingList">
+        <li>🗓️ Freedom Hub — 14.04.2025, 10:00</li>
+        <li>🗓️ Smart Office — 08.04.2025, 14:30</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 CoworklySpace</p>
+  </footer>
+</body>
+</html>
