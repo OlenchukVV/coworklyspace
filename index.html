@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoworklySpace – Головна</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
+  <script type="module" src="js/index-auth.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <h1>Coworkly<span>Space</span></h1>
+      <nav>
+        <a href="auth.html">Вхід / Реєстрація</a>
+        <a href="#">Про нас</a>
+        <a href="#">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Знаходь ідеальне місце для роботи</h2>
+      <p>Бронюй коворкінги по Україні швидко та зручно</p>
+    </div>
+  </section>
+
+  <section class="user-box container">
+    <h3 id="userGreeting">Завантаження...</h3>
+    <button id="logoutBtn" style="display:none;">Вийти</button>
+  </section>
+
+  <section class="container booking">
+    <h2>Забронюй своє місце</h2>
+    <input type="date" id="bookingDate" />
+    <input type="time" id="bookingTime" />
+    <button onclick="alert('Функція бронювання у розробці')">Забронювати</button>
+  </section>
+
+  <section class="container grid">
+    <div class="card">
+      <img src="img/space1.jpg" alt="Freedom Hub">
+      <h3>Freedom Hub</h3>
+      <p>Київ, Поділ</p>
+      <p>Оцінка: ⭐⭐⭐⭐☆</p>
+    </div>
+    <div class="card">
+      <img src="img/space2.jpg" alt="Smart Office">
+      <h3>Smart Office</h3>
+      <p>Львів, Центр</p>
+      <p>Оцінка: ⭐⭐⭐⭐⭐</p>
+    </div>
+    <div class="card">
+      <img src="img/space3.jpg" alt="WorkClub">
+      <h3>WorkClub</h3>
+      <p>Одеса, Аркадія</p>
+      <p>Оцінка: ⭐⭐⭐⭐☆</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 CoworklySpace. Всі права захищено.</p>
+    </div>
+  </footer>
+</body>
+</html>
