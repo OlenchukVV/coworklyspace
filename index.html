@@ -73,7 +73,6 @@
         .write-review-btn:hover {
             background-color: #0056b3;
         }
-
     </style>
 </head>
 
@@ -97,16 +96,20 @@
         const navLinks = document.querySelector('.nav-links');
 
         if (user) {
+            // Користувач авторизований
             authBtn.style.display = 'none';
 
+            // Додаємо лінк на "Мій кабінет" з поштою користувача
             const userEmail = user.email;
             const cabinetLink = document.createElement('a');
-            cabinetLink.href = "#";  // можна перенаправити на сторінку профілю
+            cabinetLink.href = "#";  // Можна змінити на профіль
             cabinetLink.textContent = `Мій кабінет (${userEmail})`;
             cabinetLink.style.fontWeight = 'bold';
 
+            // Додаємо лінк в навігацію
             navLinks.appendChild(cabinetLink);
         } else {
+            // Користувач не авторизований, показуємо кнопку входу
             authBtn.style.display = 'block';
         }
     });
@@ -128,7 +131,6 @@
             <nav class="nav-links">
                 <a href="about.html">Про нас</a>
                 <a href="#">Локації</a>
-                <!-- Відображення кабінету після входу -->
                 <a href="#">Мій кабінет</a>
             </nav>
             <div class="auth-btn">
