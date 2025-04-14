@@ -78,6 +78,25 @@
 
     </style>
 </head>
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
+<script>
+    // 🔥 Твої налаштування Firebase (заміни на свої)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
+        authDomain: "coworklyspace.firebaseapp.com",
+        projectId: "coworklyspace",
+        storageBucket: "coworklyspace.firebasestorage.app",
+        messagingSenderId: "1039847178271",
+        appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
+    };
+
+    // Ініціалізація
+    firebase.initializeApp(firebaseConfig);
+</script>
+
 <body>
     <header class="hero-container">
         <div class="top-bar">
