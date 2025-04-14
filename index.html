@@ -6,10 +6,11 @@
     <title>CoworklySpace</title>
     <link rel="stylesheet" href="style/main.css" />
     <style>
+        /* Стиль для меню */
         .menu-container {
             position: relative;
             display: inline-block;
-            margin-left: 10px;
+            margin-left: 10px; /* Відступ ліворуч для кнопки меню */
         }
 
         .menu-button {
@@ -45,6 +46,7 @@
             display: block;
         }
 
+        /* Тепер ці елементи не будуть зміщуватися */
         .top-bar {
             display: flex;
             align-items: center;
@@ -55,6 +57,7 @@
             margin-left: 20px;
         }
 
+        /* Стиль для кнопки "Напишіть відгук!" */
         .write-review-btn {
             position: fixed;
             bottom: 20px;
@@ -73,22 +76,33 @@
             background-color: #0056b3;
         }
 
+        /* Сховати елементи за замовчуванням */
         .auth-btn {
-            display: block;
+            display: block; /* Кнопка реєстрації */
         }
 
-        .user-email {
-            font-weight: bold;
-            color: #007bff;
+        .user-email, .cabinet-link {
+            display: none; /* За замовчуванням ці елементи приховані */
         }
+
+        /* Показати елементи після авторизації */
+        .user-email.show, .cabinet-link.show {
+            display: block; /* Відображення пошти та лінку на "Мій кабінет" */
+        }
+
+        /* Сховати кнопку після авторизації */
+        .auth-btn.hide {
+            display: none; /* Приховати кнопку "Увійти / Реєстрація" */
+        }
+
     </style>
 </head>
-
-<!-- Firebase SDK -->
+    <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 
 <script>
+    // 🔥 Твої налаштування Firebase (заміни на свої)
     const firebaseConfig = {
         apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
         authDomain: "coworklyspace.firebaseapp.com",
@@ -98,24 +112,31 @@
         appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
     };
 
+    // Ініціалізація
     firebase.initializeApp(firebaseConfig);
 
-    // Слухаємо зміни аутентифікації
+    // Код для перевірки аутентифікації
     firebase.auth().onAuthStateChanged((user) => {
         const authBtn = document.querySelector('.auth-btn');
         const userEmailContainer = document.querySelector('.user-email');
         const cabinetLink = document.querySelector('.cabinet-link');
 
         if (user) {
-            // Якщо користувач авторизований
-            authBtn.style.display = 'none';  // Сховати кнопку реєстрації/входу
-            userEmailContainer.textContent = `Мій кабінет (${user.email})`;  // Вивести пошту користувача
-            cabinetLink.style.display = 'block';  // Показуємо лінк на "Мій кабінет"
+            // Користувач увійшов
+            authBtn.classList.add('hide'); // Сховати кнопку входу/реєстрації
+
+            const userEmail = user.email;
+            userEmailContainer.textContent = `Вітаємо, ${userEmail}`; // Відображаємо пошту користувача
+            cabinetLink.textContent = `Мій кабінет (${userEmail})`; // Лінк на кабінет
+
+            // Показати пошту та лінк на кабінет
+            userEmailContainer.classList.add('show');
+            cabinetLink.classList.add('show');
         } else {
-            // Якщо користувач не авторизований
-            authBtn.style.display = 'block';  // Показуємо кнопку реєстрації/входу
-            userEmailContainer.textContent = ''; // Прибираємо текст пошти
-            cabinetLink.style.display = 'none';  // Сховати лінк на "Мій кабінет"
+            // Користувач не авторизований
+            authBtn.classList.remove('hide'); // Показати кнопку входу/реєстрації
+            userEmailContainer.classList.remove('show'); // Приховати пошту
+            cabinetLink.classList.remove('show'); // Приховати лінк на кабінет
         }
     });
 </script>
@@ -136,14 +157,15 @@
             <nav class="nav-links">
                 <a href="about.html">Про нас</a>
                 <a href="#">Локації</a>
-                <a href="#" class="cabinet-link" style="display: none;">Мій кабінет</a> <!-- Лінк на "Мій кабінет" -->
+                <!-- Лінк на Мій кабінет, який буде показуватись після авторизації -->
+                <span class="cabinet-link"></span>
             </nav>
             <div class="auth-btn">
                 <button onclick="window.location.href='auth.html'">Увійти / Реєстрація</button>
             </div>
-            <div class="user-email" style="display: none;">
-                <!-- Тут буде відображатись пошта користувача після авторизації -->
-            </div>
+
+            <!-- Пошта користувача -->
+            <div class="user-email"></div>
         </div>
         <div class="hero-text">
             <h1>Готові працювати ефективніше?</h1>
@@ -154,6 +176,7 @@
 
     <section class="benefits">
         <h2>Чому обирають нас?</h2>
+
         <div class="benefit">
             <span class="icon">⚡</span>
             <div>
@@ -211,32 +234,9 @@
         <p>© 2025 CoworklySpace. Всі права захищено.</p>
     </footer>
 
-    <button class="write-review-btn" onclick="window.location.href='reviews.html'">Напишіть відгук!</button>
-
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const reviewsPreviewList = document.getElementById("reviews-preview-list");
-
-            const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-            if (savedReviews.length === 0) {
-                reviewsPreviewList.innerHTML = "<p>Немає відгуків.</p>";
-            } else {
-                savedReviews.slice(0, 3).forEach((review) => {
-                    const reviewCard = document.createElement("div");
-                    reviewCard.classList.add("review-card");
-                    reviewCard.innerHTML = `
-                        <p>“${review.text}”</p>
-                        <span>- ${review.name}</span>
-                    `;
-                    reviewCard.addEventListener("click", () => {
-                        window.location.href = "reviews.html";
-                    });
-
-                    reviewsPreviewList.appendChild(reviewCard);
-                });
-            }
-        });
-    </script>
+    <!-- Кнопка для написання відгуку -->
+    <button class="write-review-btn" onclick="window.location.href='review.html'">
+        Напишіть відгук!
+    </button>
 </body>
 </html>
