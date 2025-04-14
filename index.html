@@ -95,6 +95,28 @@
 
     // Ініціалізація
     firebase.initializeApp(firebaseConfig);
+
+      // Код для перевірки аутентифікації
+    firebase.auth().onAuthStateChanged((user) => {
+        const authBtn = document.querySelector('.auth-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (user) {
+            // Користувач увійшов
+            authBtn.style.display = 'none';
+
+            const userEmail = user.email;
+            const cabinetLink = document.createElement('a');
+            cabinetLink.href = "#";  // або на сторінку профілю
+            cabinetLink.textContent = `Мій кабінет (${userEmail})`;
+            cabinetLink.style.fontWeight = 'bold';
+
+            navLinks.appendChild(cabinetLink);
+        } else {
+            // Користувач не авторизований
+            authBtn.style.display = 'block';
+        }
+    });
 </script>
 
 <body>
