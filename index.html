@@ -6,7 +6,6 @@
     <title>CoworklySpace</title>
     <link rel="stylesheet" href="style/main.css" />
     <style>
-        /* Стиль для меню */
         .menu-container {
             position: relative;
             display: inline-block;
@@ -90,7 +89,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 
 <script>
-    // Твої налаштування Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
         authDomain: "coworklyspace.firebaseapp.com",
@@ -102,18 +100,16 @@
 
     firebase.initializeApp(firebaseConfig);
 
+    // Слухаємо зміни аутентифікації
     firebase.auth().onAuthStateChanged((user) => {
         const authBtn = document.querySelector('.auth-btn');
-        const userEmailContainer = document.querySelector('.user-email-container');
+        const userEmailContainer = document.querySelector('.user-email');
         const cabinetLink = document.querySelector('.cabinet-link');
 
         if (user) {
             // Якщо користувач авторизований
             authBtn.style.display = 'none';  // Сховати кнопку реєстрації/входу
-
-            // Додаємо елемент з поштою користувача
-            const userEmail = user.email;
-            userEmailContainer.textContent = `Мій кабінет (${userEmail})`;
+            userEmailContainer.textContent = `Мій кабінет (${user.email})`;  // Вивести пошту користувача
             cabinetLink.style.display = 'block';  // Показуємо лінк на "Мій кабінет"
         } else {
             // Якщо користувач не авторизований
@@ -145,7 +141,7 @@
             <div class="auth-btn">
                 <button onclick="window.location.href='auth.html'">Увійти / Реєстрація</button>
             </div>
-            <div class="user-email-container">
+            <div class="user-email" style="display: none;">
                 <!-- Тут буде відображатись пошта користувача після авторизації -->
             </div>
         </div>
@@ -158,7 +154,6 @@
 
     <section class="benefits">
         <h2>Чому обирають нас?</h2>
-
         <div class="benefit">
             <span class="icon">⚡</span>
             <div>
@@ -216,31 +211,26 @@
         <p>© 2025 CoworklySpace. Всі права захищено.</p>
     </footer>
 
-    <!-- Кнопка для написання відгуку -->
     <button class="write-review-btn" onclick="window.location.href='reviews.html'">Напишіть відгук!</button>
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             const reviewsPreviewList = document.getElementById("reviews-preview-list");
 
-            // Отримуємо збережені відгуки з localStorage
             const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-            // Якщо відгуків немає, вивести повідомлення
             if (savedReviews.length === 0) {
                 reviewsPreviewList.innerHTML = "<p>Немає відгуків.</p>";
             } else {
-                // Для кожного відгуку додаємо його на головну сторінку
-                savedReviews.slice(0, 3).forEach((review) => {  // Беремо лише перші 3 відгуки
+                savedReviews.slice(0, 3).forEach((review) => {
                     const reviewCard = document.createElement("div");
                     reviewCard.classList.add("review-card");
                     reviewCard.innerHTML = `
                         <p>“${review.text}”</p>
                         <span>- ${review.name}</span>
                     `;
-                    // Додаємо подію на клік, щоб при натисканні перенаправляло на сторінку додавання відгуку
                     reviewCard.addEventListener("click", () => {
-                        window.location.href = "reviews.html";  // Перенаправлення на сторінку додавання відгуку
+                        window.location.href = "reviews.html";
                     });
 
                     reviewsPreviewList.appendChild(reviewCard);
