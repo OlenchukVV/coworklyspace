@@ -1,242 +1,134 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CoworklySpace</title>
-    <link rel="stylesheet" href="style/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна | CoworklySpace</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <style>
-        /* Стиль для меню */
-        .menu-container {
-            position: relative;
-            display: inline-block;
-            margin-left: 10px; /* Відступ ліворуч для кнопки меню */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafbfc;
         }
-
-        .menu-button {
-            font-size: 28px;
-            background-color: transparent;
-            border: none;
-            color: #007bff;
-            cursor: pointer;
+        .container {
+            width: 80%;
+            margin: 0 auto;
         }
-
-        .menu-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            border-radius: 5px;
+        h2 {
+            text-align: center;
+            color: #2e7d32;
         }
-
-        .menu-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
+        .reviews-preview {
+            margin-top: 3rem;
+            text-align: center;
         }
-
-        .menu-content a:hover {
-            background-color: #ddd;
-        }
-
-        .menu-container:hover .menu-content {
-            display: block;
-        }
-
-        /* Тепер ці елементи не будуть зміщуватися */
-        .top-bar {
+        .reviews-grid {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
-
-        .nav-links, .auth-btn {
-            margin-left: 20px;
+        .review-card {
+            background: #ffffff;
+            border-left: 5px solid #0077ff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 280px;
+            transition: box-shadow 0.3s ease;
         }
-
-        /* Стиль для кнопки "Напишіть відгук!" */
-        .write-review-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
+        .review-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        .review-card span {
+            display: block;
+            font-weight: 600;
+            color: #0077ff;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+        footer {
+            background-color: #000;
             color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
         }
-
-        .write-review-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Сховати елементи за замовчуванням */
-        .auth-btn {
-            display: block; /* Кнопка реєстрації */
-        }
-
-        .user-email, .cabinet-link {
-            display: none; /* За замовчуванням ці елементи приховані */
-        }
-
-        /* Показати елементи після авторизації */
-        .user-email.show, .cabinet-link.show {
-            display: block; /* Відображення пошти та лінку на "Мій кабінет" */
-        }
-
-        /* Сховати кнопку після авторизації */
-        .auth-btn.hide {
-            display: none; /* Приховати кнопку "Увійти / Реєстрація" */
-        }
-
     </style>
-</head>
-    <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script>
+        // Ініціалізація Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
+            authDomain: "coworklyspace.firebaseapp.com",
+            projectId: "coworklyspace",
+            storageBucket: "coworklyspace.appspot.com",
+            messagingSenderId: "11039847178271",
+            appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
+        };
+        firebase.initializeApp(firebaseConfig);
 
-<script>
-    // 🔥 Твої налаштування Firebase (заміни на свої)
-    const firebaseConfig = {
-        apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
-        authDomain: "coworklyspace.firebaseapp.com",
-        projectId: "coworklyspace",
-        storageBucket: "coworklyspace.firebasestorage.app",
-        messagingSenderId: "1039847178271",
-        appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
-    };
+        // Функція для виведення відгуків
+        function displayReviews() {
+            const reviews = [
+                { text: "Чудовий простір для роботи, дуже зручно!", author: "Олександр" },
+                { text: "Тут зручно працювати в команді. Рекомендую!", author: "Марія" },
+                { text: "Просторі зали та комфорт. Брав участь в конференції – все чудово!", author: "Іван" }
+            ];
 
-    // Ініціалізація
-    firebase.initializeApp(firebaseConfig);
-
-    // Код для перевірки аутентифікації
-    firebase.auth().onAuthStateChanged((user) => {
-        const authBtn = document.querySelector('.auth-btn');
-        const userEmailContainer = document.querySelector('.user-email');
-        const cabinetLink = document.querySelector('.cabinet-link');
-
-        if (user) {
-            // Користувач увійшов
-            authBtn.classList.add('hide'); // Сховати кнопку входу/реєстрації
-
-            const userEmail = user.email;
-            userEmailContainer.textContent = `Вітаємо, ${userEmail}`; // Відображаємо пошту користувача
-            cabinetLink.textContent = `Мій кабінет (${userEmail})`; // Лінк на кабінет
-
-            // Показати пошту та лінк на кабінет
-            userEmailContainer.classList.add('show');
-            cabinetLink.classList.add('show');
-        } else {
-            // Користувач не авторизований
-            authBtn.classList.remove('hide'); // Показати кнопку входу/реєстрації
-            userEmailContainer.classList.remove('show'); // Приховати пошту
-            cabinetLink.classList.remove('show'); // Приховати лінк на кабінет
+            const reviewsList = document.getElementById("reviews-list");
+            reviews.forEach(review => {
+                const reviewCard = document.createElement("div");
+                reviewCard.classList.add("review-card");
+                reviewCard.innerHTML = `
+                    <p>${review.text}</p>
+                    <span>— ${review.author}</span>
+                `;
+                reviewsList.appendChild(reviewCard);
+            });
         }
-    });
-</script>
 
+        // Перевірка, чи користувач авторизований
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("user-status").textContent = "Вітаємо, " + user.email;
+            } else {
+                document.getElementById("user-status").textContent = "Не авторизований";
+            }
+        });
+    </script>
+</head>
 <body>
-    <header class="hero-container">
-        <div class="top-bar">
-            <div class="menu-container">
-                <button class="menu-button">☰</button>
-                <div class="menu-content">
-                    <a href="#">Про нас</a>
-                    <a href="#">Локації</a>
-                    <a href="#">Відгуки</a>
-                    <a href="#">Інше</a>
-                </div>
-            </div>
-            <div class="logo">Coworkly<span>Space</span></div>
-            <nav class="nav-links">
-                <a href="about.html">Про нас</a>
-                <a href="#">Локації</a>
-                <!-- Лінк на Мій кабінет, який буде показуватись після авторизації -->
-                <span class="cabinet-link"></span>
-            </nav>
-            <div class="auth-btn">
-                <button onclick="window.location.href='auth.html'">Увійти / Реєстрація</button>
-            </div>
-
-            <!-- Пошта користувача -->
-            <div class="user-email"></div>
-        </div>
-        <div class="hero-text">
-            <h1>Готові працювати ефективніше?</h1>
-            <p>Створіть акаунт, щоб бронювати простори вже сьогодні.</p>
-            <button class="cta-btn">Почати зараз</button>
-        </div>
-    </header>
-
-    <section class="benefits">
-        <h2>Чому обирають нас?</h2>
-
-        <div class="benefit">
-            <span class="icon">⚡</span>
-            <div>
-                <h3>Швидке бронювання</h3>
-                <p>Резервування робочих місць за 1 хвилину без дзвінків і менеджерів.</p>
+    <div class="container">
+        <header>
+            <h2>CoworklySpace</h2>
+            <div id="user-status"></div>
+        </header>
+        
+        <!-- Відгуки -->
+        <div class="reviews-preview">
+            <h2>Відгуки</h2>
+            <div class="reviews-grid" id="reviews-list">
+                <!-- Відгуки будуть додаватися сюди за допомогою JS -->
             </div>
         </div>
 
-        <div class="benefit">
-            <span class="icon">🎯</span>
-            <div>
-                <h3>Персоналізовані рекомендації</h3>
-                <p>Алгоритми підбирають простір під ваш стиль роботи.</p>
-            </div>
-        </div>
+        <footer>
+            <p>&copy; 2025 CoworklySpace. Усі права захищені.</p>
+        </footer>
+    </div>
 
-        <div class="benefit">
-            <span class="icon">📍</span>
-            <div>
-                <h3>Актуальні локації</h3>
-                <p>Найкращі коворкінги у вашому місті, завжди поруч.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="popular-spaces">
-        <h2>Популярні простори</h2>
-        <div class="space-cards">
-            <div class="space-card">
-                <div class="img-placeholder">Фото 1</div>
-                <h3>Freedom Hub</h3>
-                <p>Київ, Поділ – ⭐⭐⭐⭐☆</p>
-            </div>
-            <div class="space-card">
-                <div class="img-placeholder">Фото 2</div>
-                <h3>Smart Office</h3>
-                <p>Львів, Центр – ⭐⭐⭐⭐⭐</p>
-            </div>
-            <div class="space-card">
-                <div class="img-placeholder">Фото 3</div>
-                <h3>WorkClub</h3>
-                <p>Одеса, Аркадія – ⭐⭐⭐⭐☆</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="reviews-preview">
-        <h2>Що кажуть користувачі</h2>
-        <div class="reviews-grid" id="reviews-preview-list">
-            <!-- Відгуки завантажуватимуться тут -->
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2025 CoworklySpace. Всі права захищено.</p>
-    </footer>
-
-    <!-- Кнопка для написання відгуку -->
-    <button class="write-review-btn" onclick="window.location.href='reviews.html'">
-        Напишіть відгук!
-    </button>
+    <script>
+        // Виведення відгуків при завантаженні сторінки
+        displayReviews();
+    </script>
 </body>
 </html>
