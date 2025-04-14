@@ -1,4 +1,4 @@
-
+/* Загальні стилі */
 body, html {
     margin: 0;
     padding: 0;
@@ -43,6 +43,7 @@ body, html {
     text-decoration: none;
 }
 
+/* Стиль кнопок */
 .auth-btn button,
 .cta-btn {
     background-color: orange;
@@ -77,23 +78,59 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .top-bar {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .auth-btn {
-        margin-top: 1rem;
-    }
+/* Сховати кнопку реєстрації після авторизації */
+.auth-btn {
+    display: block;
 }
+
+.user-email, .cabinet-link {
+    display: none;
+}
+
+.user-email.show, .cabinet-link.show {
+    display: block;
+}
+
+/* --- Стилі для меню --- */
+.menu-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.menu-button {
+    font-size: 28px;
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-content a:hover {
+    background-color: #ddd;
+}
+
+.menu-container:hover .menu-content {
+    display: block;
+}
+
 /* --- Популярні простори --- */
 .space-cards {
     display: flex;
@@ -146,178 +183,163 @@ footer {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     font-style: italic;
 }
-.benefits {
-  background-color: #f8f9fa;
-  padding: 2rem 1rem;
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: 12px;
+
+/* Стилі для кнопки "Напишіть відгук!" */
+.write-review-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
 }
 
-.benefits h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #003366;
+.write-review-btn:hover {
+    background-color: #0056b3;
 }
 
-.benefit {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.benefit .icon {
-  font-size: 2rem;
-  color: #0066cc;
-}
-
-.benefit h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #222;
-}
-
-.benefit p {
-  margin: 0.25rem 0 0;
-  color: #555;
-}
+/* --- Блок для показу email користувача --- */
 .reviews-preview {
-  text-align: center;
-  margin: 4rem 0;
+    text-align: center;
+    margin: 4rem 0;
 }
 
 .reviews-preview h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #222;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #222;
 }
 
+/* --- Відгуки для перегляду --- */
 .reviews-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .review-card {
-  background: #ffffff;
-  border-left: 5px solid #0077ff;
-  padding: 1.5rem 1.5rem 1rem 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  width: 280px;
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow 0.3s ease;
-  position: relative;
+    background: #ffffff;
+    border-left: 5px solid #0077ff;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease;
+    position: relative;
 }
 
 .review-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 
 .review-card p {
-  font-style: italic;
-  margin-bottom: 1rem;
-  color: #444;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #444;
 }
 
 .review-card span {
-  display: block;
-  font-weight: 600;
-  color: #0077ff;
-  text-align: right;
-  font-size: 0.95rem;
+    display: block;
+    font-weight: 600;
+    color: #0077ff;
+    text-align: right;
+    font-size: 0.95rem;
+}
+
+/* Стилі для сторінки відгуків */
 .reviews-page {
-  padding: 2rem;
-  font-family: sans-serif;
-  max-width: 1200px;
-  margin: auto;
+    padding: 2rem;
+    font-family: sans-serif;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .reviews-page h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .reviews-container {
-  display: flex;
-  gap: 2rem;
-  flex-direction: row;
-  align-items: flex-start;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 2rem;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 #reviews-list {
-  flex: 1;
-  min-width: 300px;
+    flex: 1;
+    min-width: 300px;
 }
 
 .review-full {
-  background: #f9f9f9;
-  border-left: 4px solid #00aaff;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    background: #f9f9f9;
+    border-left: 4px solid #00aaff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .review-full p {
-  font-size: 1.1rem;
-  margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
 }
 
 .review-full span {
-  color: #0077ff;
-  font-weight: bold;
+    color: #0077ff;
+    font-weight: bold;
 }
 
+/* Форма для відгуку */
 .review-form-section {
-  flex: 1;
-  min-width: 300px;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .review-form-section textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
+    width: 100%;
+    min-height: 120px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
 }
 
 .rating-stars {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .rating-stars span {
-  margin-right: 0.5rem;
-  font-weight: bold;
+    margin-right: 0.5rem;
+    font-weight: bold;
 }
 
 .review-form-section button {
-  background-color: #00aaff;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
+    background-color: #00aaff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .review-form-section button:hover {
-  background-color: #0077cc;
+    background-color: #0077cc;
 }
