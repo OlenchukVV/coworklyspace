@@ -1,0 +1,240 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.reviews-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Форма */
+.review-form-section {
+  background-color: #fff;
+  max-width: 700px; /* Зменшена ширина */
+  margin: 0 auto 2.5rem auto; /* Зменшений відступ */
+  padding: 1.5rem; /* Зменшені відступи */
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px; /* Зменшена висота */
+  padding: 1rem;
+  padding-top: 2rem; /* Зменшене верхнє відступи */
+  margin-bottom: 1rem;
+  font-size: 0.95rem; /* Зменшений шрифт */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  background-color: #fdfdfd;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+  resize: none;
+  text-align: center;
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #00aaff;
+  box-shadow: 0 0 8px rgba(0, 170, 255, 0.3);
+  background-color: #ffffff;
+}
+
+.rating-stars {
+  margin-bottom: 1rem;
+  font-size: 0.9rem; /* Зменшено розмір шрифта для зірочок */
+}
+
+button {
+  background-color: #00aaff;
+  color: white;
+  padding: 0.6rem 1.2rem; /* Зменшено відступи */
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem; /* Зменшено шрифт */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0077cc;
+}
+
+/* Відгуки */
+#reviews-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.review-card {
+  background: #fff;
+  border-left: 4px solid #00aaff;
+  padding: 1.2rem; /* Зменшені відступи */
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px; /* Зменшена ширина картки відгуку */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInCard 0.5s ease-out forwards;
+}
+
+.review-card p {
+  font-size: 0.95rem; /* Зменшений розмір шрифту */
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.review-card span {
+  font-weight: bold;
+  color: #0077ff;
+  text-align: right;
+  display: block;
+  font-size: 0.85rem; /* Зменшений шрифт */
+}
+
+.delete-review {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  color: #fff;
+  background-color: #ff4d4f;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-review:hover {
+  background-color: #e60000;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a;
+}
+
+.no-reviews {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f44336;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #fbe9e7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 600px;
+}
+
+/* Анімація для плавного появи */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Анімація для карток відгуків */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Анімація для форми */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стиль кнопки "Назад на головну" */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+footer a {
+  background-color: #00aaff;
+  color: white;
+  padding: 0.6rem 1.5rem; /* Зменшені відступи */
+  border-radius: 30px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+footer a:hover {
+  background-color: #0077cc;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+footer a:active {
+  background-color: #006bb3;
+  transform: translateY(0);
+}
+
+/* Вишукане меню форми */
+.review-form-section h2 {
+  font-size: 1.6rem; /* Зменшено розмір заголовка */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem; /* Зменшено відступ */
+}
+
+textarea, .rating-stars {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
