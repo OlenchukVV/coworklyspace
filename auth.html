@@ -11,7 +11,7 @@
             apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
             authDomain: "coworklyspace.firebaseapp.com",
             projectId: "coworklyspace",
-            storageBucket: "coworklyspace.appspot.com",
+            storageBucket: "coworklyspace.firebasestorage.app",
             messagingSenderId: "11039847178271",
             appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
         };
@@ -30,7 +30,6 @@
                     }, 2000); // Затримка перед перенаправленням
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     document.getElementById("message").textContent = `Помилка: ${errorMessage}`;
                 });
@@ -49,11 +48,21 @@
                     }, 2000); // Затримка перед перенаправленням
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     document.getElementById("message").textContent = `Помилка: ${errorMessage}`;
                 });
         }
+
+        // Показати email користувача після входу
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("emailDisplay").textContent = user.email;
+                document.getElementById("registerBtn").style.display = "none"; // Сховати кнопку реєстрації
+            } else {
+                document.getElementById("emailDisplay").textContent = "";
+                document.getElementById("registerBtn").style.display = "block"; // Показати кнопку реєстрації
+            }
+        });
     </script>
     <style>
         body {
@@ -100,6 +109,11 @@
             color: #2e7d32;
             margin-top: 15px;
         }
+        #emailDisplay {
+            color: #333;
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -107,8 +121,9 @@
         <h2>Вхід / Реєстрація</h2>
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Пароль">
-        <button onclick="register()">Зареєструватися</button>
+        <button id="registerBtn" onclick="register()">Зареєструватися</button>
         <button onclick="login()">Увійти</button>
+        <div id="emailDisplay"></div>
         <div class="message" id="message"></div>
     </div>
 </body>
