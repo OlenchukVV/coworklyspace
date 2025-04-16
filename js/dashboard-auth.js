@@ -19,6 +19,20 @@ const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
 const logoutLink = document.getElementById("logoutLink");
 
+// 🔐 Перевірка авторизації та вивід email
+onAuthStateChanged(auth, (user) => {
+  if (user && userEmail) {
+    userEmail.textContent = user.email;
+  } else {
+    // Дати Firebase трохи часу, якщо ще не підтягнуло user
+    setTimeout(() => {
+      if (!auth.currentUser) {
+        window.location.href = "auth.html";
+      }
+    }, 200);
+  }
+});
+
 // 🔙 Кнопка "Назад"
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
