@@ -6,6 +6,7 @@
   <title>Мій кабінет | CoworklySpace</title>
   <link rel="stylesheet" href="style/dashboard.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script type="module" src="js/dashboard-auth.js" defer></script>
 </head>
 <body>
   <header class="dashboard-header">
@@ -17,7 +18,7 @@
 
   <main class="container">
     <section class="user-info">
-      <h1>👋 Вітаємо, <span id="userEmail"></span></h1>
+      <h1>👋 Вітаємо, <span id="userEmail">користувачу</span></h1>
       <p class="user-meta">Це твій особистий кабінет. Тут ти можеш переглядати бронювання та керувати своїм профілем.</p>
     </section>
 
@@ -52,7 +53,5 @@
       <p>© 2025 CoworklySpace. Усі права захищено.</p>
     </div>
   </footer>
-
-  <script type="module" src="./js/dashboard-auth.js" defer></script>
 </body>
 </html>
