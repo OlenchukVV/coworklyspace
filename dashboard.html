@@ -38,14 +38,24 @@
       </div>
     </section>
 
-    <section class="profile-settings">
-      <h2>⚙️ Профіль</h2>
-      <ul>
-        <li><a href="#" id="changePasswordLink">Змінити пароль</a></li>
-        <li><a href="#" id="updateEmailLink">Оновити email</a></li>
-        <button id="deleteAccountBtn">Вийти з акаунта</button>
-      </ul>
-    </section>
+    <div class="profile-settings">
+  <h2>⚙️ Профіль</h2>
+  <p><a href="#" id="changePasswordLink">Змінити пароль</a></p>
+  <p><a href="#" id="updateEmailLink">Оновити email</a></p>
+  <button id="logoutBtn">Вийти з акаунта</button>
+
+  <div id="passwordChangeSection" class="section" style="display: none;">
+    <h3>🔒 Змінити пароль</h3>
+    <input type="password" id="newPassword" placeholder="Новий пароль">
+    <button id="updatePasswordBtn">Змінити пароль</button>
+  </div>
+
+  <div id="emailUpdateSection" class="section" style="display: none;">
+    <h3>📧 Змінити Email</h3>
+    <input type="email" id="newEmail" placeholder="Новий email">
+    <button id="updateEmailBtn">Змінити email</button>
+  </div>
+</div>
   </main>
 
   <footer class="footer">
