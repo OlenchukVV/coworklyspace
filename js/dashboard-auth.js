@@ -19,15 +19,6 @@ const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
 const logoutLink = document.getElementById("logoutLink");
 
-// 🔐 Перевірка авторизації користувача
-onAuthStateChanged(auth, (user) => {
-  if (user && userEmail) {
-    userEmail.textContent = user.displayName || user.email;
-  } else {
-    window.location.href = "auth.html";
-  }
-});
-
 // 🔙 Кнопка "Назад"
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
