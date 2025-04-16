@@ -12,21 +12,38 @@
   <header class="dashboard-header">
     <div class="container header-content">
       <div class="logo">CoworklySpace</div>
-      <button id="logoutBtn" class="logout-btn">Вийти</button>
+      <button id="goBackBtn" class="logout-btn">← Назад</button>
     </div>
   </header>
 
   <main class="container">
-    <section class="welcome-section">
-      <h1>👋 Привіт, <span id="userEmail">Користувачу</span></h1>
-      <p>Радий бачити тебе знову! Тут ти можеш переглядати свої бронювання та керувати профілем.</p>
+    <section class="user-info">
+      <h1>👋 Вітаємо, <span id="userEmail">користувачу</span></h1>
+      <p class="user-meta">Це твій особистий кабінет. Тут ти можеш переглядати бронювання та керувати своїм профілем.</p>
     </section>
 
     <section class="booking-section">
       <h2>📅 Мої бронювання</h2>
-      <ul id="bookingList">
-        <li>🗓️ Freedom Hub — 14.04.2025, 10:00</li>
-        <li>🗓️ Smart Office — 08.04.2025, 14:30</li>
+      <div class="booking-cards" id="bookingList">
+        <div class="card">
+          <h3>📍 Freedom Hub</h3>
+          <p>Дата: 14.04.2025</p>
+          <p>Час: 10:00</p>
+        </div>
+        <div class="card">
+          <h3>🏢 Smart Office</h3>
+          <p>Дата: 08.04.2025</p>
+          <p>Час: 14:30</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-settings">
+      <h2>⚙️ Профіль</h2>
+      <ul>
+        <li><a href="#">Змінити пароль</a></li>
+        <li><a href="#">Оновити email</a></li>
+        <li><a href="#" id="logoutLink">Вийти з акаунта</a></li>
       </ul>
     </section>
   </main>
