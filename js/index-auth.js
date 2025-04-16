@@ -41,3 +41,12 @@ if (logoutBtn) {
     });
   });
 }
+
+// Кнопка "Увійти / Реєстрація"
+const authBtn = document.getElementById("authBtn");
+
+if (authBtn) {
+  authBtn.addEventListener("click", () => {
+    window.location.href = "auth.html";
+  });
+}
