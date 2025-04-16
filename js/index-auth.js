@@ -22,16 +22,33 @@ const startNowBtn = document.getElementById("startNowBtn");
 
 onAuthStateChanged(auth, (user) => {
   console.log("Стан авторизації:", user); // Для перевірки
+  
   if (user) {
     if (loginLink) loginLink.style.display = "none";
     if (registerLink) registerLink.style.display = "none";
     if (dashboardLink) dashboardLink.style.display = "inline-block";
     if (logoutBtn) logoutBtn.style.display = "inline-block";
+
+     // ✅ Якщо авторизований — оновлюємо кнопку
+    if (startNowBtn) {
+      startNowBtn.textContent = "Знайти місця";
+      startNowBtn.onclick = () => {
+        window.location.href = "search.html";
+      };
+    }
   } else {
     if (loginLink) loginLink.style.display = "inline-block";
     if (registerLink) registerLink.style.display = "inline-block";
     if (dashboardLink) dashboardLink.style.display = "none";
     if (logoutBtn) logoutBtn.style.display = "none";
+
+    // 🔁 Якщо неавторизований — повертаємо стандартний текст
+    if (startNowBtn) {
+      startNowBtn.textContent = "Почати зараз";
+      startNowBtn.onclick = () => {
+        window.location.href = "auth.html";
+      };
+    }
   }
 });
 
