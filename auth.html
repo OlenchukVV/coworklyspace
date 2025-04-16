@@ -1,130 +1,128 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Авторизація | CoworklySpace</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script>
-        // Ініціалізація Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
-            authDomain: "coworklyspace.firebaseapp.com",
-            projectId: "coworklyspace",
-            storageBucket: "coworklyspace.firebasestorage.app",
-            messagingSenderId: "11039847178271",
-            appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
-        };
-        firebase.initializeApp(firebaseConfig);
-        
-        // Реєстрація
-        function register() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    document.getElementById("message").textContent = "Реєстрація успішна! Перенаправляємо на головну...";
-                    setTimeout(() => {
-                        window.location.href = "index.html";  // Перехід на головну сторінку
-                    }, 2000); // Затримка перед перенаправленням
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    document.getElementById("message").textContent = `Помилка: ${errorMessage}`;
-                });
-        }
-
-        // Вхід
-        function login() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    document.getElementById("message").textContent = "Вхід успішний! Перенаправляємо на головну...";
-                    setTimeout(() => {
-                        window.location.href = "index.html";  // Перехід на головну сторінку
-                    }, 2000); // Затримка перед перенаправленням
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    document.getElementById("message").textContent = `Помилка: ${errorMessage}`;
-                });
-        }
-
-        // Показати email користувача після входу
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                document.getElementById("emailDisplay").textContent = user.email;
-                document.getElementById("registerBtn").style.display = "none"; // Сховати кнопку реєстрації
-            } else {
-                document.getElementById("emailDisplay").textContent = "";
-                document.getElementById("registerBtn").style.display = "block"; // Показати кнопку реєстрації
-            }
-        });
-    </script>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 400px;
-            margin: 5% auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #2e7d32;
-        }
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #43a047;
-        }
-        .message {
-            text-align: center;
-            color: #2e7d32;
-            margin-top: 15px;
-        }
-        #emailDisplay {
-            color: #333;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Авторизація | CoworklySpace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f7f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      width: 48%;
+    }
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      color: green;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Вхід / Реєстрація</h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Пароль">
-        <button id="registerBtn" onclick="register()">Зареєструватися</button>
-        <button onclick="login()">Увійти</button>
-        <div id="emailDisplay"></div>
-        <div class="message" id="message"></div>
+  <div class="container">
+    <div class="tabs">
+      <button onclick="showForm('login')">Вхід</button>
+      <button onclick="showForm('register')">Реєстрація</button>
     </div>
+
+    <div id="login-form">
+      <h2>Вхід</h2>
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Пароль" required />
+      <button onclick="login()">Увійти</button>
+    </div>
+
+    <div id="register-form" style="display:none;">
+      <h2>Реєстрація</h2>
+      <input type="email" id="register-email" placeholder="Email" required />
+      <input type="password" id="register-password" placeholder="Пароль" required />
+      <button onclick="register()">Зареєструватися</button>
+    </div>
+
+    <div id="auth-message" class="message"></div>
+  </div>
+
+  <script type="module">
+    import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './js/firebase.js';
+
+    const messageEl = document.getElementById("auth-message");
+
+    window.register = async () => {
+      const email = document.getElementById("register-email").value;
+      const password = document.getElementById("register-password").value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        messageEl.textContent = "Реєстрація успішна! Перенаправляємо...";
+        setTimeout(() => window.location.href = "index.html", 1500);
+      } catch (error) {
+        messageEl.textContent = error.message;
+        messageEl.style.color = "red";
+      }
+    };
+
+    window.login = async () => {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        messageEl.textContent = "Вхід успішний! Перенаправляємо...";
+        setTimeout(() => window.location.href = "index.html", 1500);
+      } catch (error) {
+        messageEl.textContent = error.message;
+        messageEl.style.color = "red";
+      }
+    };
+
+    window.showForm = (type) => {
+      document.getElementById("login-form").style.display = type === 'login' ? 'block' : 'none';
+      document.getElementById("register-form").style.display = type === 'register' ? 'block' : 'none';
+      messageEl.textContent = "";
+    };
+  </script>
 </body>
 </html>
