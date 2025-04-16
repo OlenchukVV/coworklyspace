@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Кабінет користувача | CoworklySpace</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style/dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мій кабінет | CoworklySpace</title>
+  <link rel="stylesheet" href="style/dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <script type="module" src="js/dashboard-auth.js" defer></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Мій кабінет</h1>
-      <button id="logoutBtn">Вийти</button>
+  <header class="dashboard-header">
+    <div class="container header-content">
+      <div class="logo">CoworklySpace</div>
+      <button id="logoutBtn" class="logout-btn">Вийти</button>
     </div>
   </header>
 
   <main class="container">
-    <section class="user-info">
-      <h2>Вітаємо, <span id="userEmail">користувач</span></h2>
+    <section class="welcome-section">
+      <h1>👋 Привіт, <span id="userEmail">Користувачу</span></h1>
+      <p>Радий бачити тебе знову! Тут ти можеш переглядати свої бронювання та керувати профілем.</p>
     </section>
 
-    <section class="booking-history">
-      <h3>Мої бронювання</h3>
+    <section class="booking-section">
+      <h2>📅 Мої бронювання</h2>
       <ul id="bookingList">
         <li>🗓️ Freedom Hub — 14.04.2025, 10:00</li>
         <li>🗓️ Smart Office — 08.04.2025, 14:30</li>
@@ -30,8 +31,10 @@
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 CoworklySpace</p>
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CoworklySpace. Усі права захищено.</p>
+    </div>
   </footer>
 </body>
 </html>
