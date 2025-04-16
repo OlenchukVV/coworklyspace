@@ -18,41 +18,44 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ Кнопка "Назад"
-const goBackBtn = document.getElementById("goBackBtn");
-if (goBackBtn) {
-  goBackBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
-}
+// ✅ Після завантаження DOM — чекаємо Firebase
+document.addEventListener("DOMContentLoaded", () => {
+  const userEmail = document.getElementById("userEmail");
+  const goBackBtn = document.getElementById("goBackBtn");
+  const logoutLink = document.getElementById("logoutLink");
 
-// 🔐 Перевірка авторизації
-const userEmail = document.getElementById("userEmail");
+  console.log("📦 DOM повністю завантажено");
 
-onAuthStateChanged(auth, (user) => {
-  console.log("🔥 Перевірка користувача:", user);
+  onAuthStateChanged(auth, (user) => {
+    console.log("👤 onAuthStateChanged:", user);
 
-  if (user && userEmail) {
-    userEmail.textContent = user.email;
-  } else {
-    window.location.href = "auth.html";
-  }
-});
-
-// 🚪 Вийти з акаунта
-const logoutLink = document.getElementById("logoutLink");
-if (logoutLink) {
-  logoutLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    const confirmLogout = confirm("Ви дійсно хочете вийти з акаунта?");
-    if (confirmLogout) {
-      signOut(auth)
-        .then(() => {
-          window.location.href = "index.html";
-        })
-        .catch((error) => {
-          alert("Помилка при виході: " + error.message);
-        });
+    if (user && userEmail) {
+      userEmail.textContent = user.email;
+    } else {
+      console.warn("❌ Користувач не авторизований — перекидаю");
+      window.location.href = "auth.html";
     }
   });
-}
+
+  if (goBackBtn) {
+    goBackBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
+
+  if (logoutLink) {
+    logoutLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const confirmLogout = confirm("Ви дійсно хочете вийти з акаунта?");
+      if (confirmLogout) {
+        signOut(auth)
+          .then(() => {
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            alert("Помилка при виході: " + error.message);
+          });
+      }
+    });
+  }
+});
