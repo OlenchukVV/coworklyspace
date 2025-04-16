@@ -22,8 +22,6 @@ if (goBackBtn) {
   });
 }
 
-const auth = getAuth(app);
-
 // кнопка "Назад"
 const goBackBtn = document.getElementById("goBackBtn");
 if (goBackBtn) {
