@@ -88,4 +88,39 @@ if (updateEmailLink && emailUpdateSection) {
     passwordChangeSection.style.display = "none";
   });
 }
+// ✅ Зміна пароля
+const updatePasswordBtn = document.getElementById("updatePasswordBtn");
+if (updatePasswordBtn) {
+  updatePasswordBtn.addEventListener("click", () => {
+    const newPassword = document.getElementById("newPassword").value;
+    const user = auth.currentUser;
+
+    if (user && newPassword) {
+      user.updatePassword(newPassword).then(() => {
+        alert("Пароль успішно змінено");
+        document.getElementById("newPassword").value = "";
+      }).catch((error) => {
+        alert("❌ Помилка при зміні пароля: " + error.message);
+      });
+    }
+  });
+}
+
+// ✅ Зміна email
+const updateEmailBtn = document.getElementById("updateEmailBtn");
+if (updateEmailBtn) {
+  updateEmailBtn.addEventListener("click", () => {
+    const newEmail = document.getElementById("newEmail").value;
+    const user = auth.currentUser;
+
+    if (user && newEmail) {
+      user.updateEmail(newEmail).then(() => {
+        alert("Email успішно змінено");
+        document.getElementById("newEmail").value = "";
+      }).catch((error) => {
+        alert("❌ Помилка при зміні email: " + error.message);
+      });
+    }
+  });
+}
 
