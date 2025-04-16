@@ -1,7 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
-// 🔥 Ініціалізація Firebase (твій config)
+// 🔥 Твій Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBlwKso4qEDRK1SnhKxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -11,28 +15,35 @@ const firebaseConfig = {
   appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
 };
 
+// ✅ Ініціалізація Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// 🔍 Вибираємо елементи з DOM
+// ⛓️ Вибираємо елементи
 const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
 const logoutLink = document.getElementById("logoutLink");
 
-// 🔐 Перевірка авторизації та вивід email
+// 👁️ Діагностика
+console.log("Очікуємо перевірку користувача...");
+
+// ✅ Перевірка авторизації
 onAuthStateChanged(auth, (user) => {
+  console.log("onAuthStateChanged спрацювало");
+  console.log("user:", user);
+  console.log("auth.currentUser:", auth.currentUser);
+
   if (user && userEmail) {
     userEmail.textContent = user.email;
   } else {
-    // ❗️ Затримка перед редиректом, щоб дати Firebase час підтягнути auth
     setTimeout(() => {
       if (!auth.currentUser) {
+        console.log("Користувач не авторизований — редирект");
         window.location.href = "auth.html";
       }
-    }, 300); // 300мс працює надійно
+    }, 300);
   }
 });
-
 
 // 🔙 Кнопка "Назад"
 if (goBackBtn) {
@@ -47,11 +58,13 @@ if (logoutLink) {
     e.preventDefault();
     const confirmLogout = confirm("Ви дійсно хочете вийти з акаунта?");
     if (confirmLogout) {
-      signOut(auth).then(() => {
-        window.location.href = "index.html";
-      }).catch((error) => {
-        alert("Помилка при виході: " + error.message);
-      });
+      signOut(auth)
+        .then(() => {
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          alert("Помилка при виході: " + error.message);
+        });
     }
   });
 }
