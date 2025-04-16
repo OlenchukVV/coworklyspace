@@ -1,50 +1,73 @@
 body {
-  font-family: 'Inter', sans-serif;
   margin: 0;
-  background: #f4f6f8;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f9fc;
   color: #333;
 }
+
 .container {
+  width: 90%;
   max-width: 1000px;
-  margin: auto;
+  margin: 0 auto;
   padding: 20px;
 }
-header {
-  background: #2e7d32;
-  color: white;
-  padding: 20px;
+
+.dashboard-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 0;
 }
-header h1 {
-  display: inline-block;
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-#logoutBtn {
-  float: right;
-  background: #e53935;
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #007bff;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
   border: none;
-  color: white;
-  padding: 10px 20px;
+  padding: 10px 16px;
   border-radius: 6px;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
 }
-main h2, h3 {
-  color: #2e7d32;
+
+.logout-btn:hover {
+  background-color: #d9363e;
 }
-.booking-history ul {
-  list-style: none;
-  padding-left: 0;
-}
-.booking-history li {
-  background: white;
-  padding: 10px 15px;
-  margin: 10px 0;
-  border-left: 5px solid #66bb6a;
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #263238;
-  color: white;
+
+.welcome-section {
   margin-top: 40px;
+}
+
+.booking-section {
+  margin-top: 40px;
+}
+
+.booking-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.booking-section li {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
 }
