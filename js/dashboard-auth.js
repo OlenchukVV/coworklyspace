@@ -2,8 +2,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/fireba
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
+  updateEmail,
+  updatePassword
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
 
 // 🔥 Firebase конфіг
 const firebaseConfig = {
@@ -96,7 +99,7 @@ if (updatePasswordBtn) {
     const user = auth.currentUser;
 
     if (user && newPassword) {
-      user.updatePassword(newPassword).then(() => {
+      updatePassword(user, newPassword).then(() => {
         alert("Пароль успішно змінено");
         document.getElementById("newPassword").value = "";
       }).catch((error) => {
@@ -114,7 +117,7 @@ if (updateEmailBtn) {
     const user = auth.currentUser;
 
     if (user && newEmail) {
-      user.updateEmail(newEmail).then(() => {
+      updateEmail(user, newEmail).then(() => {
         alert("Email успішно змінено");
         document.getElementById("newEmail").value = "";
       }).catch((error) => {
