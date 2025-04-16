@@ -13,6 +13,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// 👇 Додаємо кнопку назад
+const goBackBtn = document.getElementById("goBackBtn");
+
+if (goBackBtn) {
+  goBackBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
+
 const userEmail = document.getElementById("userEmail");
 const logoutBtn = document.getElementById("logoutBtn");
 
