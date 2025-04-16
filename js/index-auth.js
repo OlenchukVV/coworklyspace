@@ -13,22 +13,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const userGreeting = document.getElementById("userGreeting");
+// Вибираємо елементи
+const loginLink = document.getElementById("loginLink");
+const registerLink = document.getElementById("registerLink");
+const dashboardLink = document.getElementById("dashboardLink");
 const logoutBtn = document.getElementById("logoutBtn");
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    userGreeting.textContent = `Вітаємо, ${user.email}!`;
-    logoutBtn.style.display = "inline-block";
+    if (loginLink) loginLink.style.display = "none";
+    if (registerLink) registerLink.style.display = "none";
+    if (dashboardLink) dashboardLink.style.display = "inline-block";
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
   } else {
-    userGreeting.innerHTML = 'Ви не авторизовані. <a href="auth.html">Увійти</a>';
-    logoutBtn.style.display = "none";
+    if (loginLink) loginLink.style.display = "inline-block";
+    if (registerLink) registerLink.style.display = "inline-block";
+    if (dashboardLink) dashboardLink.style.display = "none";
+    if (logoutBtn) logoutBtn.style.display = "none";
   }
 });
 
-logoutBtn.addEventListener("click", () => {
-  signOut(auth).then(() => {
-    alert("Ви вийшли.");
-    location.reload();
+// Вихід
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    signOut(auth).then(() => {
+      location.reload();
+    });
   });
-});
+}
