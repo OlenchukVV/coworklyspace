@@ -170,6 +170,26 @@
     <!-- Кнопка для написання відгуку -->
     <button class="write-review-btn" onclick="window.location.href='reviews.html'">Напишіть відгук!</button>
 
+    <!-- 🌙 ТУТ ВСТАВЛЯЄМО ПЕРЕМИКАЧ ТЕМИ -->
+    <button id="theme-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; background: none; border: none; font-size: 24px; cursor: pointer;">
+        🌙
+    </button>
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            toggleBtn.textContent = '☀️';
+        }
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             const reviewsPreviewList = document.getElementById("reviews-preview-list");
