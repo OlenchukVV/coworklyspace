@@ -5,7 +5,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
-// 🔥 Твій Firebase config
+// 🔥 Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBlwKso4qEDRK1SnhKxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -15,44 +15,36 @@ const firebaseConfig = {
   appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
 };
 
-// ✅ Ініціалізація Firebase
+// 1. Ініціалізація
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ⛓️ Вибираємо елементи
+// 2. Отримуємо DOM-елементи
 const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
 const logoutLink = document.getElementById("logoutLink");
 
-// 👁️ Діагностика
-console.log("Очікуємо перевірку користувача...");
-
-// ✅ Перевірка авторизації
+// 3. Слухаємо стан авторизації
 onAuthStateChanged(auth, (user) => {
-  console.log("onAuthStateChanged спрацювало");
-  console.log("user:", user);
-  console.log("auth.currentUser:", auth.currentUser);
+  console.log("onAuthStateChanged:", user);
 
   if (user && userEmail) {
     userEmail.textContent = user.email;
   } else {
-    setTimeout(() => {
-      if (!auth.currentUser) {
-        console.log("Користувач не авторизований — редирект");
-        window.location.href = "auth.html";
-      }
-    }, 300);
+    // 🛑 Не редиректи одразу, чекаємо, поки Firebase точно скаже
+    // Але ми вже всередині onAuthStateChanged — значить можна чесно редиректити
+    window.location.href = "auth.html";
   }
 });
 
-// 🔙 Кнопка "Назад"
+// 4. Кнопка "Назад"
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
     window.location.href = "index.html";
   });
 }
 
-// 🚪 Кнопка "Вийти з акаунта"
+// 5. Кнопка "Вийти"
 if (logoutLink) {
   logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
