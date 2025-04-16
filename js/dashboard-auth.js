@@ -24,14 +24,15 @@ onAuthStateChanged(auth, (user) => {
   if (user && userEmail) {
     userEmail.textContent = user.email;
   } else {
-    // Дати Firebase трохи часу, якщо ще не підтягнуло user
+    // ❗️ Затримка перед редиректом, щоб дати Firebase час підтягнути auth
     setTimeout(() => {
       if (!auth.currentUser) {
         window.location.href = "auth.html";
       }
-    }, 200);
+    }, 300); // 300мс працює надійно
   }
 });
+
 
 // 🔙 Кнопка "Назад"
 if (goBackBtn) {
