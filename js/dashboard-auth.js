@@ -5,7 +5,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
-// 🔥 Твій Firebase config
+// Твій Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBlwKso4qEDRK1SnhKxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -18,31 +18,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// 🎯 Елементи DOM
+// Отримуємо елементи
 const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
 const logoutLink = document.getElementById("logoutLink");
 
-// 👀 Перевірка auth state
+// onAuthStateChanged спрацьовує ТІЛЬКИ тоді, коли Firebase точно знає стан юзера
 onAuthStateChanged(auth, (user) => {
-  console.log("onAuthStateChanged:", user);
+  console.log("🔥 Firebase перевірив користувача:", user);
 
   if (user && userEmail) {
     userEmail.textContent = user.email;
   } else {
-    // 👇 затримки більше НЕ потрібно, onAuthStateChanged вже гарантує auth state
+    console.warn("❌ Користувача немає — перенаправляю на auth.html");
     window.location.href = "auth.html";
   }
 });
 
-// 🔙 Назад
+// Кнопка "Назад"
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
     window.location.href = "index.html";
   });
 }
 
-// 🚪 Вийти
+// Кнопка "Вийти"
 if (logoutLink) {
   logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
