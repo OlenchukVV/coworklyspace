@@ -65,40 +65,27 @@ if (deleteAccountBtn) {
     }
   });
 }
-// ✅ Зміна пароля
-const updatePasswordBtn = document.getElementById("updatePasswordBtn");
-if (updatePasswordBtn) {
-  updatePasswordBtn.addEventListener("click", () => {
-    const newPasswordInput = document.getElementById("newPassword");
-    const newPassword = newPasswordInput ? newPasswordInput.value : "";
-    const user = auth.currentUser;
+// Показати форму зміни пароля
+const changePasswordLink = document.getElementById("changePasswordLink");
+const passwordChangeSection = document.getElementById("passwordChangeSection");
 
-    if (user && newPassword) {
-      user.updatePassword(newPassword).then(() => {
-        alert("Пароль успішно змінено");
-        newPasswordInput.value = "";
-      }).catch((error) => {
-        alert("❌ Помилка при зміні пароля: " + error.message);
-      });
-    }
+if (changePasswordLink && passwordChangeSection) {
+  changePasswordLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    passwordChangeSection.style.display = "block";
+    emailUpdateSection.style.display = "none";
   });
 }
 
-// ✅ Зміна email
-const updateEmailBtn = document.getElementById("updateEmailBtn");
-if (updateEmailBtn) {
-  updateEmailBtn.addEventListener("click", () => {
-    const newEmailInput = document.getElementById("newEmail");
-    const newEmail = newEmailInput ? newEmailInput.value : "";
-    const user = auth.currentUser;
+// Показати форму оновлення email
+const updateEmailLink = document.getElementById("updateEmailLink");
+const emailUpdateSection = document.getElementById("emailUpdateSection");
 
-    if (user && newEmail) {
-      user.updateEmail(newEmail).then(() => {
-        alert("Email успішно змінено");
-        newEmailInput.value = "";
-      }).catch((error) => {
-        alert("❌ Помилка при зміні email: " + error.message);
-      });
-    }
+if (updateEmailLink && emailUpdateSection) {
+  updateEmailLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    emailUpdateSection.style.display = "block";
+    passwordChangeSection.style.display = "none";
   });
 }
+
