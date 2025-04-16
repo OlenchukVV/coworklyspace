@@ -65,3 +65,40 @@ if (deleteAccountBtn) {
     }
   });
 }
+// ✅ Зміна пароля
+const updatePasswordBtn = document.getElementById("updatePasswordBtn");
+if (updatePasswordBtn) {
+  updatePasswordBtn.addEventListener("click", () => {
+    const newPasswordInput = document.getElementById("newPassword");
+    const newPassword = newPasswordInput ? newPasswordInput.value : "";
+    const user = auth.currentUser;
+
+    if (user && newPassword) {
+      user.updatePassword(newPassword).then(() => {
+        alert("Пароль успішно змінено");
+        newPasswordInput.value = "";
+      }).catch((error) => {
+        alert("❌ Помилка при зміні пароля: " + error.message);
+      });
+    }
+  });
+}
+
+// ✅ Зміна email
+const updateEmailBtn = document.getElementById("updateEmailBtn");
+if (updateEmailBtn) {
+  updateEmailBtn.addEventListener("click", () => {
+    const newEmailInput = document.getElementById("newEmail");
+    const newEmail = newEmailInput ? newEmailInput.value : "";
+    const user = auth.currentUser;
+
+    if (user && newEmail) {
+      user.updateEmail(newEmail).then(() => {
+        alert("Email успішно змінено");
+        newEmailInput.value = "";
+      }).catch((error) => {
+        alert("❌ Помилка при зміні email: " + error.message);
+      });
+    }
+  });
+}
