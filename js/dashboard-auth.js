@@ -22,6 +22,35 @@ if (goBackBtn) {
   });
 }
 
+const auth = getAuth(app);
+
+// кнопка "Назад"
+const goBackBtn = document.getElementById("goBackBtn");
+if (goBackBtn) {
+  goBackBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
+
+// кнопка "Вийти з акаунта"
+const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+if (deleteAccountBtn) {
+  deleteAccountBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const confirmLogout = confirm("Вийти з акаунта?");
+    if (confirmLogout) {
+      signOut(auth)
+        .then(() => {
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          alert("Помилка при виході: " + error.message);
+        });
+    }
+  });
+}
+
+
 const userEmail = document.getElementById("userEmail");
 const logoutBtn = document.getElementById("logoutBtn");
 
