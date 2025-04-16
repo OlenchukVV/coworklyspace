@@ -20,6 +20,7 @@ const dashboardLink = document.getElementById("dashboardLink");
 const logoutBtn = document.getElementById("logoutBtn");
 
 onAuthStateChanged(auth, (user) => {
+  console.log("Стан авторизації:", user); // Для перевірки
   if (user) {
     if (loginLink) loginLink.style.display = "none";
     if (registerLink) registerLink.style.display = "none";
