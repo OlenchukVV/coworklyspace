@@ -10,7 +10,7 @@ body, html {
 }
 
 .hero-container {
-    background-image: url('style/img/banner1.jpg');
+    background-image: url('../img/banner1.jpg');
     background-size: cover;
     background-position: center;
     padding: 1rem;
