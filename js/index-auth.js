@@ -18,6 +18,7 @@ const loginLink = document.getElementById("loginLink");
 const registerLink = document.getElementById("registerLink");
 const dashboardLink = document.getElementById("dashboardLink");
 const logoutBtn = document.getElementById("logoutBtn");
+const startNowBtn = document.getElementById("startNowBtn");
 
 onAuthStateChanged(auth, (user) => {
   console.log("Стан авторизації:", user); // Для перевірки
