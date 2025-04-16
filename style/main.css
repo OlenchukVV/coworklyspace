@@ -320,55 +320,5 @@ footer {
 .review-form-section button:hover {
   background-color: #0077cc;
 }
-    /* --- Dark mode styles --- */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
 
-.dark-mode header,
-.dark-mode footer,
-.dark-mode .hero-container,
-.dark-mode .top-bar,
-.dark-mode nav {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    border-color: #333;
-}
-
-.dark-mode a {
-    color: #90caf9;
-}
-
-.dark-mode .cta-btn,
-.dark-mode .auth-btn button {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-}
-
-.dark-mode .benefit,
-.dark-mode .space-card,
-.dark-mode .testimonial,
-.dark-mode .review-card,
-.dark-mode .review-form-section {
-    background-color: #1c1c1c;
-    color: #f0f0f0;
-}
-
-.dark-mode .img-placeholder {
-    background-color: #444;
-}
-
-.dark-mode .menu-content {
-    background-color: #2a2a2a;
-}
-
-.dark-mode .menu-content a {
-    color: #fff;
-}
-
-.dark-mode .menu-content a:hover {
-    background-color: #444;
-}
 
