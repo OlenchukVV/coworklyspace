@@ -1,6 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
+// 🔥 Firebase конфіг
 const firebaseConfig = {
   apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -13,25 +18,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// 👇 Додаємо кнопку назад
+// 🎯 Отримуємо елементи
+const userEmail = document.getElementById("userEmail");
 const goBackBtn = document.getElementById("goBackBtn");
+const logoutBtn = document.getElementById("logoutBtn"); // стара кнопка
+const deleteAccountBtn = document.getElementById("deleteAccountBtn"); // нова кнопка
 
+// 👤 Слухаємо користувача
+onAuthStateChanged(auth, (user) => {
+  if (user && userEmail) {
+    userEmail.textContent = user.email;
+  } else {
+    window.location.href = "auth.html";
+  }
+});
+
+// 🔙 Кнопка "Назад"
 if (goBackBtn) {
   goBackBtn.addEventListener("click", () => {
     window.location.href = "index.html";
   });
 }
 
-// кнопка "Назад"
-const goBackBtn = document.getElementById("goBackBtn");
-if (goBackBtn) {
-  goBackBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
+// 🚪 Кнопка ВИХОДУ (якщо у тебе ще є стара кнопка logoutBtn)
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
   });
 }
 
-// кнопка "Вийти з акаунта"
-const deleteAccountBtn = document.getElementById("deleteAccountBtn");
+// 🚪 Кнопка "Вийти з акаунта" (під формою)
 if (deleteAccountBtn) {
   deleteAccountBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -47,21 +65,3 @@ if (deleteAccountBtn) {
     }
   });
 }
-
-
-const userEmail = document.getElementById("userEmail");
-const logoutBtn = document.getElementById("logoutBtn");
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    userEmail.textContent = user.email;
-  } else {
-    window.location.href = "auth.html";
-  }
-});
-
-logoutBtn.addEventListener("click", () => {
-  signOut(auth).then(() => {
-    window.location.href = "index.html";
-  });
-});
