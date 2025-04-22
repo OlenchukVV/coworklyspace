@@ -35,14 +35,15 @@
     </div>
     
   <!-- Модальне вікно -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <img id="modalImage" src="" alt="Coworking photo" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
-      <span class="close">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDesc"></p>
-      <p><strong>Місто:</strong> <span id="modalCity"></span></p>
-      <button id="reserveButton">Забронювати місце</button>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+        <p><strong>Місто:</strong> <span id="modalCity"></span></p>
+        <img id="modalImage" src="" alt="Coworking photo" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <button id="reserveButton">Забронювати місце</button>
+      </div>
     </div>
   </main>
 
@@ -50,10 +51,8 @@
    <p>© 2025 CoworklySpace. Всі права захищено.</p>
   </footer>
 
+  <script src="./js/window.js"></script>
   <script>
-  <script type="module">
-    import { setupModal, openModal } from './js/window.js';
-  
     const coworkings = [
       {
         city: 'kyiv',
@@ -167,7 +166,7 @@
             <p>${c.desc}</p>
             <p><strong>Місто:</strong> ${c.city.charAt(0).toUpperCase() + c.city.slice(1)}</p>
           `;
-          div.addEventListener('click', () => openModal(c));
+          div.addEventListener('click', () => openModal(c)); // відкрити модальне вікно
           list.appendChild(div);
         });
     }
