@@ -42,27 +42,6 @@ export function openModal(data) {
   elements.features.textContent = data.features || 'Немає додаткових зручностей';
   elements.map.href = data.map || '#';
 
-  // Прив'язка кнопки бронювання
-  elements.bookBtn.onclick = () => {
-    const user = auth.currentUser;
-    if (!user) return alert("Будь ласка, увійдіть, щоб забронювати місце.");
-
-    const bookingRef = ref(db, `bookedSpaces/${user.uid}`);
-    const bookingData = {
-      ...data,
-      bookedAt: new Date().toISOString()
-    };
-
-    push(bookingRef, bookingData)
-      .then(() => {
-        alert('Місце заброньовано!');
-        modal.style.display = 'none';
-      })
-      .catch(err => {
-        console.error('Помилка при бронюванні:', err);
-        alert('Сталася помилка при бронюванні: ' + err.message);
-      });
-  };
 
   // Показати модальне вікно
   modal.style.display = 'block';
