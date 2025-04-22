@@ -1,31 +1,26 @@
+// js/window.js
 export function setupModal() {
-  const modal = document.createElement('div');
-  modal.id = 'modal';
-  modal.innerHTML = `
-    <div class="modal-backdrop"></div>
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDesc"></p>
-      <p><strong>Місто:</strong> <span id="modalCity"></span></p>
-      <img id="modalImage" src="" alt="Coworking photo" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
-      <button id="reserveButton">Забронювати</button>
-    </div>
-  `;
-  document.body.appendChild(modal);
+  const modal = document.getElementById('modal');
+  const closeBtn = modal.querySelector('.modal-close');
 
-  const backdrop = modal.querySelector('.modal-backdrop');
-  const close = modal.querySelector('.modal-close');
-
-  close.addEventListener('click', () => modal.style.display = 'none');
-  backdrop.addEventListener('click', () => modal.style.display = 'none');
+  closeBtn.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
 }
 
-export function openModal(coworking) {
+export function openModal(data) {
   const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalCity = document.getElementById('modalCity');
+  const modalImage = document.getElementById('modalImage');
+
+  modalTitle.textContent = data.name;
+  modalDesc.textContent = data.desc;
+  modalCity.textContent = data.city.charAt(0).toUpperCase() + data.city.slice(1);
+  modalImage.src = data.image;
   modal.style.display = 'block';
-  document.getElementById('modalTitle').textContent = coworking.name;
-  document.getElementById('modalDesc').textContent = coworking.desc;
-  document.getElementById('modalCity').textContent = coworking.city.charAt(0).toUpperCase() + coworking.city.slice(1);
-  document.getElementById('modalImage').src = coworking.image;
 }
