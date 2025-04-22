@@ -69,38 +69,3 @@ if (authBtn) {
     window.location.href = "auth.html";
   });
 }
-
-// Функція для бронювання місця
-function bookPlace(place) {
-    // Зберігаємо інформацію про заброньоване місце в localStorage
-    localStorage.setItem('bookedPlace', place);
-
-    // Повідомляємо користувача про успішне бронювання
-    alert(`Ви забронювали місце: ${place}`);
-    
-    // Оновлюємо кнопку, щоб показати, що місце заброньовано
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        if (button.textContent === 'Забронювати') {
-            button.textContent = 'Заброньовано';
-            button.disabled = true;
-        }
-    });
-}
-
-// Перевірка на завантаження сторінки, щоб побачити, чи є збережене заброньоване місце
-window.onload = function() {
-    const bookedPlace = localStorage.getItem('bookedPlace');
-    if (bookedPlace) {
-        alert(`Ви вже забронювали: ${bookedPlace}`);
-        
-        // Оновлюємо всі кнопки для відображення заброньованих місць
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            if (button.textContent === 'Забронювати') {
-                button.textContent = 'Заброньовано';
-                button.disabled = true;
-            }
-        });
-    }
-};
