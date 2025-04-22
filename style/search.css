@@ -26,15 +26,6 @@ body {
   z-index: 100;
 }
 
-.search-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh; /* Мінімальна висота 100% вікна браузера */
-}
-
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
