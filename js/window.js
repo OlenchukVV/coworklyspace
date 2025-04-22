@@ -1,8 +1,9 @@
 // js/window.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
+// Конфіг Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -13,7 +14,14 @@ const firebaseConfig = {
   databaseURL: "https://coworklyspace-default-rtdb.firebaseio.com/"
 };
 
-const app = initializeApp(firebaseConfig);
+// Запобігання дублюванню ініціалізації
+let app;
+try {
+  app = getApp();
+} catch (e) {
+  app = initializeApp(firebaseConfig);
+}
+
 const auth = getAuth(app);
 const db = getDatabase(app);
 
