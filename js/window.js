@@ -37,5 +37,29 @@ export function openModal(data) {
   modalClose.addEventListener('click', () => {
     modal.style.display = 'none';
   });
+  
+  // Бронювання місця
+  bookButton.onclick = function() {
+    const userId = firebase.auth().currentUser.uid; // Отримуємо ID користувача, якщо він автентифікований
+    const bookedSpace = {
+      name: data.name,
+      desc: data.desc,
+      city: data.city,
+      image: data.image,
+      price: data.price,
+      features: data.features,
+      map: data.map
+    };
+
+    // Додаємо інформацію до Firebase під унікальним ID користувача
+    firebase.database().ref('bookedSpaces/' + userId).push(bookedSpace)
+      .then(() => {
+        alert('Місце заброньовано!');
+        modal.style.display = 'none'; // Закриваємо модальне вікно
+      })
+      .catch((error) => {
+        console.error('Error booking space:', error);
+      });
+  };
 }
 
