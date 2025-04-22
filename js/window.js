@@ -2,7 +2,7 @@ import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/10.10.
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
-// Конфіг Firebase
+// Firebase конфігурація
 const firebaseConfig = {
   apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
   authDomain: "coworklyspace.firebaseapp.com",
@@ -12,100 +12,90 @@ const firebaseConfig = {
   appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
 };
 
-// Запобігання дублюванню ініціалізації
-let app;
-try {
-  app = getApp();
-} catch (e) {
-  app = initializeApp(firebaseConfig);
-}
+// Ініціалізація Firebase
+const app = (() => {
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(firebaseConfig);
+  }
+})();
 
 const auth = getAuth(app);
 const db = getDatabase(app);
 
+// Функція для налаштування модального вікна
 export function setupModal() {
   const modal = document.getElementById('modal');
-  const closeBtn = modal.querySelector('.modal-close');
+  const closeBtn = modal?.querySelector('.modal-close');
 
-  // Перевірка на існування елементів
-  if (!modal || !closeBtn) {
-    console.error('Не знайдено елементів для модального вікна');
-    return;
-  }
+  if (!modal || !closeBtn) return console.error('Не знайдено елементів для модального вікна');
 
-  closeBtn.addEventListener('click', () => modal.style.display = 'none');
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
+  closeBtn.onclick = () => (modal.style.display = 'none');
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  };
 }
 
+// Функція для відкриття модального вікна з даними
 export function openModal(data) {
-  const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalCity = document.getElementById('modalCity');
-  const modalImage = document.getElementById('modalImage');
-  const modalPrice = document.getElementById('modalPrice');
-  const modalFeatures = document.getElementById('modalFeatures');
-  const modalMap = document.getElementById('modalMap');
-  const modalClose = document.querySelector('.modal-close');
-  const bookButton = document.getElementById('reserveButton');
+  const getEl = id => document.getElementById(id);
+  const modal = getEl('modal');
 
-  // Перевірка на існування елементів
-  if (!modal || !modalTitle || !modalDesc || !modalCity || !modalImage || !modalPrice || !modalFeatures || !modalMap || !modalClose || !bookButton) {
-    console.error('Не знайдені необхідні елементи модального вікна');
-    return;
+  const elements = {
+    title: getEl('modalTitle'),
+    desc: getEl('modalDesc'),
+    city: getEl('modalCity'),
+    image: getEl('modalImage'),
+    price: getEl('modalPrice'),
+    features: getEl('modalFeatures'),
+    map: getEl('modalMap'),
+    bookBtn: getEl('reserveButton'),
+    closeBtn: modal?.querySelector('.modal-close'),
+  };
+
+  // Перевірка наявності всіх елементів
+  if (Object.values(elements).some(el => !el) || !modal) {
+    return console.error('Не знайдені необхідні елементи модального вікна');
   }
 
-  // Заповнення даних
-  modalTitle.textContent = data.name;
-  modalDesc.textContent = data.desc;
-  modalCity.textContent = data.city.charAt(0).toUpperCase() + data.city.slice(1);
-  modalImage.src = data.image;
-  modalPrice.textContent = `${data.price} грн/день`;
-  modalFeatures.textContent = data.features || 'Немає додаткових зручностей';
-  modalMap.href = data.map || '#';
+  // Заповнення даними
+  elements.title.textContent = data.name;
+  elements.desc.textContent = data.desc;
+  elements.city.textContent = capitalize(data.city);
+  elements.image.src = data.image;
+  elements.price.textContent = `${data.price} грн/день`;
+  elements.features.textContent = data.features || 'Немає додаткових зручностей';
+  elements.map.href = data.map || '#';
 
-  // Очистити попередній обробник події
-  bookButton.onclick = function () {
+  // Прив'язка кнопки бронювання
+  elements.bookBtn.onclick = () => {
     const user = auth.currentUser;
-    if (!user) {
-      alert("Будь ласка, увійдіть, щоб забронювати місце.");
-      return;
-    }
+    if (!user) return alert("Будь ласка, увійдіть, щоб забронювати місце.");
 
-    const userId = user.uid;
-    const bookedSpace = {
-      name: data.name,
-      desc: data.desc,
-      city: data.city,
-      image: data.image,
-      price: data.price,
-      features: data.features,
-      map: data.map,
+    const bookingRef = ref(db, `bookedSpaces/${user.uid}`);
+    const bookingData = {
+      ...data,
       bookedAt: new Date().toISOString()
     };
 
-    const userBookingRef = ref(db, 'bookedSpaces/' + userId);
-
-    push(userBookingRef, bookedSpace)
+    push(bookingRef, bookingData)
       .then(() => {
         alert('Місце заброньовано!');
         modal.style.display = 'none';
       })
-      .catch((error) => {
-        console.error('Помилка при бронюванні:', error);
-        alert('Сталася помилка при бронюванні: ' + error.message);
+      .catch(err => {
+        console.error('Помилка при бронюванні:', err);
+        alert('Сталася помилка при бронюванні: ' + err.message);
       });
   };
 
-  // Показ модального вікна
+  // Показати модальне вікно
   modal.style.display = 'block';
 
-  // Обробник для закриття
-  modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  // Закриття по хрестику
+  elements.closeBtn.onclick = () => (modal.style.display = 'none');
 }
+
+// Допоміжна функція: велика літера
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
