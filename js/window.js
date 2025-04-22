@@ -23,7 +23,7 @@ export function openModal(data) {
   const modalClose = document.querySelector('.modal-close');
 
   // Додаємо ідентифікатор для кнопки бронювання
-  const bookButton = document.getElementById('bookButton');  // Ось сюди
+  const bookButton = document.getElementById('reserveButton');  // Ось сюди
 
   modalTitle.textContent = data.name;
   modalDesc.textContent = data.desc;
