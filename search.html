@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Знайти місця</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .filter-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .filter-container select {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .space-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .space-card p {
+      margin: 0.25rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar" style="padding: 1rem;">
+    <div class="logo"><span>CoworklySpace</span></div>
+    <nav class="nav-links">
+      <a href="index.html">Головна</a>
+      <a href="auth.html">Увійти</a>
+    </nav>
+  </header>
+
+  <main style="padding: 2rem;">
+    <h1 style="text-align:center; color:#222;">Оберіть коворкінг</h1>
+
+    <div class="filter-container">
+      <label for="citySelect">Місто:</label>
+      <select id="citySelect">
+        <option value="all">Усі міста</option>
+        <option value="Київ">Київ</option>
+        <option value="Одеса">Одеса</option>
+        <option value="Львів">Львів</option>
+        <option value="Харків">Харків</option>
+      </select>
+    </div>
+
+    <div class="space-cards" id="spacesContainer"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 CoworklySpace. Усі права захищено.</p>
+  </footer>
+
+  <script>
+    const coworkingSpaces = [
+      {
+        city: "Київ",
+        name: "Freedom Hub",
+        address: "вул. Січових Стрільців 12",
+        price: "200₴/день",
+        img: "https://source.unsplash.com/featured/?coworking,modern",
+        desc: "Цілодобовий доступ, зони відпочинку, безкоштовна кава."
+      },
+      {
+        city: "Київ",
+        name: "Hive Place",
+        address: "вул. Бульварно-Кудрявська 33",
+        price: "250₴/день",
+        img: "https://source.unsplash.com/featured/?office,team",
+        desc: "Тиха атмосфера, Zoom-кімнати, поруч кафе та метро."
+      },
+      {
+        city: "Київ",
+        name: "SmartSpace",
+        address: "вул. Басейна 14",
+        price: "230₴/день",
+        img: "https://source.unsplash.com/featured/?workspace,design",
+        desc: "Сучасний інтер'єр, потужний інтернет, гардероб та душ."
+      },
+      {
+        city: "Київ",
+        name: "Workify",
+        address: "вул. Хрещатик 7",
+        price: "220₴/день",
+        img: "https://source.unsplash.com/featured/?workplace,urban",
+        desc: "У самому центрі міста, ідеально для фрилансерів та команд."
+      },
+      {
+        city: "Одеса",
+        name: "WorkClub",
+        address: "вул. Аркадійська 1",
+        price: "180₴/день",
+        img: "https://source.unsplash.com/featured/?coworking,beach",
+        desc: "Вид на море, коворкінг + лаунж, чудовий клімат контроль."
+      },
+      {
+        city: "Одеса",
+        name: "SeaSpace",
+        address: "вул. Гагарінське плато 5",
+        price: "210₴/день",
+        img: "https://source.unsplash.com/featured/?office,sea",
+        desc: "Великі вікна, свіже повітря, коворкінг з пляжною атмосферою."
+      },
+      {
+        city: "Одеса",
+        name: "PortLab",
+        address: "вул. Приморська 3",
+        price: "200₴/день",
+        img: "https://source.unsplash.com/featured/?open-space",
+        desc: "Лофтовий стиль, багато природного світла, конференц-зали."
+      },
+      {
+        city: "Одеса",
+        name: "CoOffice",
+        address: "вул. Французький бульвар 10",
+        price: "190₴/день",
+        img: "https://source.unsplash.com/featured/?shared-office",
+        desc: "Вигідна ціна, простір для подій, зручна парковка."
+      },
+      {
+        city: "Львів",
+        name: "Smart Office",
+        address: "пл. Ринок 1",
+        price: "250₴/день",
+        img: "https://source.unsplash.com/featured/?coworking,lviv",
+        desc: "Прямо в центрі Львова, атмосфера старого міста."
+      },
+      {
+        city: "Львів",
+        name: "UrbanWork",
+        address: "вул. Зеленa 20",
+        price: "200₴/день",
+        img: "https://source.unsplash.com/featured/?office,loft",
+        desc: "Індустріальний стиль, простір для презентацій, кав’ярня."
+      },
+      {
+        city: "Львів",
+        name: "LvivLab",
+        address: "вул. Дорошенка 10",
+        price: "220₴/день",
+        img: "https://source.unsplash.com/featured/?team,workspace",
+        desc: "Розумне зонування, окремі переговорні, швидкий інтернет."
+      },
+      {
+        city: "Львів",
+        name: "LoftSpace",
+        address: "вул. Коперника 11",
+        price: "230₴/день",
+        img: "https://source.unsplash.com/featured/?creative,office",
+        desc: "Креативне середовище, молодіжна атмосфера, події щотижня."
+      },
+      {
+        city: "Харків",
+        name: "KharkivHub",
+        address: "вул. Сумська 22",
+        price: "190₴/день",
+        img: "https://source.unsplash.com/featured/?coworking,kharkiv",
+        desc: "Ідеальне місце для стартапів, зали для пітчів і презентацій."
+      },
+      {
+        city: "Харків",
+        name: "RocketSpace",
+        address: "пр. Науки 40",
+        price: "210₴/день",
+        img: "https://source.unsplash.com/featured/?space,tech",
+        desc: "Технологічна атмосфера, зона тестування продуктів."
+      },
+      {
+        city: "Харків",
+        name: "StartupRoom",
+        address: "вул. Пушкінська 19",
+        price: "180₴/день",
+        img: "https://source.unsplash.com/featured/?startup,office",
+        desc: "Затишно, швидко, дешево — для індивідуальної роботи."
+      },
+      {
+        city: "Харків",
+        name: "TechSpace",
+        address: "вул. Мироносицька 3",
+        price: "200₴/день",
+        img: "https://source.unsplash.com/featured/?developer,hub",
+        desc: "Фокус на ІТ-команди, обладнання для технічних демонстрацій."
+      }
+    ];
+
+    const spacesContainer = document.getElementById("spacesContainer");
+    const citySelect = document.getElementById("citySelect");
+
+    function renderSpaces(city) {
+      spacesContainer.innerHTML = "";
+
+      const filtered = city === "all"
+        ? coworkingSpaces
+        : coworkingSpaces.filter(space => space.city === city);
+
+      filtered.forEach(space => {
+        const card = document.createElement("div");
+        card.className = "space-card";
+        card.innerHTML = `
+          <img src="${space.img}" alt="${space.name}">
+          <h3>${space.name}</h3>
+          <p><strong>${space.city}</strong>, ${space.address}</p>
+          <p>${space.desc}</p>
+          <p><strong>від ${space.price}</strong></p>
+        `;
+        spacesContainer.appendChild(card);
+      });
+    }
+
+    citySelect.addEventListener("change", () => {
+      renderSpaces(citySelect.value);
+    });
+
+    renderSpaces("all");
+  </script>
+</body>
+</html>
