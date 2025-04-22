@@ -28,3 +28,27 @@ export function openModal(coworking) {
   document.getElementById('modalDesc').textContent = coworking.desc;
   document.getElementById('modalCity').textContent = coworking.city.charAt(0).toUpperCase() + coworking.city.slice(1);
 }
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalCity = document.getElementById('modalCity');
+const modalImage = document.getElementById('modalImage');
+const closeBtn = document.querySelector('.modal .close');
+
+function openModal(data) {
+  modalTitle.textContent = data.name;
+  modalDesc.textContent = data.desc;
+  modalCity.textContent = data.city.charAt(0).toUpperCase() + data.city.slice(1);
+  modalImage.src = data.image;
+  modal.style.display = 'block';
+}
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
