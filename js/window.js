@@ -49,6 +49,7 @@ export function openModal(data) {
   const modalClose = document.querySelector('.modal-close');
   const bookButton = document.getElementById('reserveButton');
 
+  // Заповнення даних
   modalTitle.textContent = data.name;
   modalDesc.textContent = data.desc;
   modalCity.textContent = data.city.charAt(0).toUpperCase() + data.city.slice(1);
@@ -56,15 +57,12 @@ export function openModal(data) {
   modalPrice.textContent = `${data.price} грн/день`;
   modalFeatures.textContent = data.features || 'Немає додаткових зручностей';
   modalMap.href = data.map || '#';
-  modal.style.display = 'block';
 
-  // Закриття модалки
-  modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-  
-  // Бронювання місця
-  bookButton.onclick = function() {
+  // Очистити попередній обробник
+  const newBookButton = bookButton.cloneNode(true);
+  bookButton.parentNode.replaceChild(newBookButton, bookButton);
+
+  newBookButton.onclick = function () {
     const user = auth.currentUser;
     if (!user) {
       alert("Будь ласка, увійдіть, щоб забронювати місце.");
@@ -92,7 +90,16 @@ export function openModal(data) {
       })
       .catch((error) => {
         console.error('Помилка при бронюванні:', error);
+        alert('Сталася помилка при бронюванні.');
       });
   };
+
+  // Показ модального вікна
+  modal.style.display = 'block';
+
+  // Обробник для закриття
+  modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 }
 
