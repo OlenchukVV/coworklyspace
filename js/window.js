@@ -22,6 +22,9 @@ export function openModal(data) {
   const modalMap = document.getElementById('modalMap');
   const modalClose = document.querySelector('.modal-close');
 
+  // Додаємо ідентифікатор для кнопки бронювання
+  const bookButton = document.getElementById('bookButton');  // Ось сюди
+
   modalTitle.textContent = data.name;
   modalDesc.textContent = data.desc;
   modalCity.textContent = data.city.charAt(0).toUpperCase() + data.city.slice(1);
