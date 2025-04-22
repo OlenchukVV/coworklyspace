@@ -1,148 +1,30 @@
-const coworkings = [
-  // Ваші дані про коворкінги
-  {
-        city: 'kyiv',
-        name: 'Creative Quarter',
-        image: 'https://creativequarter.net/wp-content/uploads/2019/08/location-gulliver_new.jpg',
-        desc: 'Стильний простір у центрі Києва з конференц-залами та кухнею.'
-      },
-      {
-        city: 'kyiv',
-        name: 'Hub 4.0',
-        image: 'https://4hub.com.ua/wp-content/uploads/2019/10/smart-office-14.jpg',
-        desc: 'Інноваційне середовище для стартапів і підприємців.'
-      },
-      {
-        city: 'kyiv',
-        name: 'Platforma Leonardo',
-        image: 'https://static.wixstatic.com/media/09d8dc_3594a39862264187bc33050d4b89a20d~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/09d8dc_3594a39862264187bc33050d4b89a20d~mv2.jpg',
-        desc: 'Сучасні робочі місця та креативна атмосфера.'
-      },
-      {
-        city: 'kyiv',
-        name: 'Lift99 Kyiv Hub',
-        image: 'https://images.squarespace-cdn.com/content/v1/59e0ec65b1ffb652c49849db/1597655219312-I618LXCO5ZF7DKF5WXNR/lift99-kyiv-mriya-big.jpg',
-        desc: 'Комʼюніті орієнтований простір для новаторів.'
-      },
-      {
-        city: 'lviv',
-        name: 'IHub Lviv',
-        image: 'https://ihub.ua/wp-content/uploads/2022/09/lv_ev_10-min-1920x706.jpg',
-        desc: 'Затишний хаб у центрі Львова для айтішників.'
-      },
-      {
-        city: 'lviv',
-        name: 'Startup Depot',
-        image: 'https://coworking.lviv.ua/wp-content/uploads/2024/08/dsc_5334.jpeg',
-        desc: 'Ідеальне місце для фрилансерів і команд.'
-      },
-      {
-        city: 'lviv',
-        name: 'Communa',
-        image: 'https://communa.net.ua/wp-content/uploads/2020/09/photo_2019-08-10_13-15-37.jpg',
-        desc: 'Затишна атмосфера та арт-орієнтований простір.'
-      },
-      {
-        city: 'lviv',
-        name: 'Futura Hub',
-        image: 'https://www.lvivconvention.com.ua/wp-content/uploads/2021/03/kholl-futury.jpg',
-        desc: 'Інновації та креативність у кожному метрі.'
-      },
-      {
-        city: 'odesa',
-        name: 'Terminal 42',
-        image: 'https://culturemeter.od.ua/wp-content/uploads/2020/03/XXL.jpg',
-        desc: 'Сучасний простір біля моря з усім необхідним.'
-      },
-      {
-        city: 'odesa',
-        name: 'Impact Hub Odessa',
-        image: 'https://impacthub.odessa.ua/wp-content/themes/impact/img/lvng-room.png',
-        desc: 'Ідеальне місце для соціальних проєктів і стартапів.'
-      },
-      {
-        city: 'odesa',
-        name: '4City',
-        image: 'https://renty.ua/imgs/97c69c97faad50bfd29d4bd2a549de624b90f9d5906c29889d9a3ef18cf3ffa1',
-        desc: 'Мультифункціональний простір із кафе та подіями.'
-      },
-      {
-        city: 'odesa',
-        name: 'Workit',
-        image: 'https://www.coworkbooking.com/images/371!252/kapacita/19175/20210626_115555.jpg',
-        desc: 'Сучасні офіси з гнучкими умовами для команд.'
-      },
-      {
-        city: 'kharkiv',
-        name: 'Fabrika.space',
-        image: 'https://fabrika.space/wp-content/uploads/2016/02/site-IMG_0018-2.jpg',
-        desc: 'Один із найбільших просторів у Харкові з подієвим залом.'
-      },
-      {
-        city: 'kharkiv',
-        name: 'Spalah Kharkiv',
-        image: 'https://lh6.googleusercontent.com/proxy/AnP8ingU4fYj0HJ3X8ESIVNIfcgNyp0n75y8ld4qJA8LoqkJHIn2JH9Fd6dRTW62rbE6Y0RWBNFTDiwJxy78n1gd5LgwOhhuedln6y_Vlnz7b4BlBvhqJCiwFJAqPfNjG2sgV-NllAoc2OzZ8urexZApiY2uAJM',
-        desc: 'Комфортна атмосфера для навчання та роботи.'
-      },
-      {
-        city: 'kharkiv',
-        name: 'Coworking 365',
-        image: 'https://coworking365.ua/wp-content/uploads/IMG_7815-860x575.jpg',
-        desc: 'Гнучкий графік, багато світла, зручне розташування.'
-      },
-      {
-        city: 'kharkiv',
-        name: 'Smart Space',
-        image: 'https://cdn.pragmatika.media/2025/02/Cluster-Space-07-02-2025-0-29-title.jpg',
-        desc: 'Мінімалізм, фокус, технології — усе в одному.'
-      }
-    ];
+// window.js
+export function setupModal() {
+  const modal = document.createElement('div');
+  modal.id = 'modal';
+  modal.innerHTML = `
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <p><strong>Місто:</strong> <span id="modalCity"></span></p>
+      <button id="reserveButton">Забронювати</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
 
-const list = document.getElementById('coworkingList');
-const modal = document.getElementById('modal');
-const closeModal = document.querySelector('.close');
-const modalTitle = document.getElementById('modalTitle');
-const modalDesc = document.getElementById('modalDesc');
-const modalCity = document.getElementById('modalCity');
-const reserveButton = document.getElementById('reserveButton');
+  const backdrop = modal.querySelector('.modal-backdrop');
+  const close = modal.querySelector('.modal-close');
 
-function renderCoworkings(filter = 'all') {
-  list.innerHTML = '';
-  coworkings.filter(c => filter === 'all' || c.city === filter)
-    .forEach(c => {
-      const div = document.createElement('div');
-      div.className = 'space-card';
-      div.innerHTML = `
-        <img src="${c.image}" alt="${c.name}">
-        <h3>${c.name}</h3>
-        <p>${c.desc}</p>
-        <p><strong>Місто:</strong> ${c.city.charAt(0).toUpperCase() + c.city.slice(1)}</p>
-      `;
-      div.addEventListener('click', () => openModal(c));
-      list.appendChild(div);
-    });
+  close.addEventListener('click', () => modal.style.display = 'none');
+  backdrop.addEventListener('click', () => modal.style.display = 'none');
 }
 
-function openModal(coworking) {
-  modalTitle.textContent = coworking.name;
-  modalDesc.textContent = coworking.desc;
-  modalCity.textContent = coworking.city.charAt(0).toUpperCase() + coworking.city.slice(1);
+export function openModal(coworking) {
+  const modal = document.getElementById('modal');
   modal.style.display = 'block';
+  document.getElementById('modalTitle').textContent = coworking.name;
+  document.getElementById('modalDesc').textContent = coworking.desc;
+  document.getElementById('modalCity').textContent = coworking.city.charAt(0).toUpperCase() + coworking.city.slice(1);
 }
-
-closeModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-  }
-};
-
-function filterByCity() {
-  const city = document.getElementById('cityFilter').value;
-  renderCoworkings(city);
-}
-
-renderCoworkings();
