@@ -1,4 +1,3 @@
-// js/window.js
 import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
@@ -28,6 +27,12 @@ export function setupModal() {
   const modal = document.getElementById('modal');
   const closeBtn = modal.querySelector('.modal-close');
 
+  // Перевірка на існування елементів
+  if (!modal || !closeBtn) {
+    console.error('Не знайдено елементів для модального вікна');
+    return;
+  }
+
   closeBtn.addEventListener('click', () => modal.style.display = 'none');
   window.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -48,6 +53,12 @@ export function openModal(data) {
   const modalClose = document.querySelector('.modal-close');
   const bookButton = document.getElementById('reserveButton');
 
+  // Перевірка на існування елементів
+  if (!modal || !modalTitle || !modalDesc || !modalCity || !modalImage || !modalPrice || !modalFeatures || !modalMap || !modalClose || !bookButton) {
+    console.error('Не знайдені необхідні елементи модального вікна');
+    return;
+  }
+
   // Заповнення даних
   modalTitle.textContent = data.name;
   modalDesc.textContent = data.desc;
@@ -57,11 +68,8 @@ export function openModal(data) {
   modalFeatures.textContent = data.features || 'Немає додаткових зручностей';
   modalMap.href = data.map || '#';
 
-  // Очистити попередній обробник
-  const newBookButton = bookButton.cloneNode(true);
-  bookButton.parentNode.replaceChild(newBookButton, bookButton);
-
-  newBookButton.onclick = function () {
+  // Очистити попередній обробник події
+  bookButton.onclick = function () {
     const user = auth.currentUser;
     if (!user) {
       alert("Будь ласка, увійдіть, щоб забронювати місце.");
@@ -89,7 +97,7 @@ export function openModal(data) {
       })
       .catch((error) => {
         console.error('Помилка при бронюванні:', error);
-        alert('Сталася помилка при бронюванні.');
+        alert('Сталася помилка при бронюванні: ' + error.message);
       });
   };
 
@@ -101,4 +109,3 @@ export function openModal(data) {
     modal.style.display = 'none';
   });
 }
-
