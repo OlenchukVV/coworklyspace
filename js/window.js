@@ -10,8 +10,7 @@ const firebaseConfig = {
   projectId: "coworklyspace",
   storageBucket: "coworklyspace.appspot.com",
   messagingSenderId: "1039847178271",
-  appId: "1:1039847178271:web:9fbece3255c14b5217d52a",
-  databaseURL: "https://coworklyspace-default-rtdb.firebaseio.com/"
+  appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
 };
 
 // Запобігання дублюванню ініціалізації
