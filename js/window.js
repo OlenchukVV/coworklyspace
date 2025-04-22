@@ -1,29 +1,3 @@
-import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
-
-// Firebase конфігурація
-const firebaseConfig = {
-  apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
-  authDomain: "coworklyspace.firebaseapp.com",
-  projectId: "coworklyspace",
-  storageBucket: "coworklyspace.appspot.com",
-  messagingSenderId: "1039847178271",
-  appId: "1:1039847178271:web:9fbece3255c14b5217d52a"
-};
-
-// Ініціалізація Firebase
-const app = (() => {
-  try {
-    return getApp();
-  } catch {
-    return initializeApp(firebaseConfig);
-  }
-})();
-
-const auth = getAuth(app);
-const db = getDatabase(app);
-
 // Функція для налаштування модального вікна
 export function setupModal() {
   const modal = document.getElementById('modal');
