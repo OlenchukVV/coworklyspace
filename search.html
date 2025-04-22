@@ -38,10 +38,13 @@
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Coworking photo" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
         <h2 id="modalTitle"></h2>
         <p id="modalDesc"></p>
+        <p><strong>Ціна:</strong> <span id="modalPrice"></span> грн/день</p>
+        <p><strong>Зручності:</strong> <span id="modalFeatures"></span></p>
         <p><strong>Місто:</strong> <span id="modalCity"></span></p>
-        <img id="modalImage" src="" alt="Coworking photo" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <p><a id="modalMap" href="#" target="_blank">📍 Переглянути на мапі</a></p>
         <button id="reserveButton">Забронювати місце</button>
       </div>
     </div>
@@ -64,96 +67,144 @@
         name: 'Creative Quarter',
         image: 'https://creativequarter.net/wp-content/uploads/2019/08/location-gulliver_new.jpg',
         desc: 'Стильний простір у центрі Києва з конференц-залами та кухнею.'
+        price: 600,
+        map: 'https://www.google.com.ua/maps/search/Creative+Quarter/@50.4432923,30.48079,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Wi-Fi, кухня, переговорні кімнати'
       },
       {
         city: 'kyiv',
         name: 'Hub 4.0',
         image: 'https://4hub.com.ua/wp-content/uploads/2019/10/smart-office-14.jpg',
         desc: 'Інноваційне середовище для стартапів і підприємців.'
+        price: 500,
+        map: 'https://www.google.com.ua/maps/place/Coworking+HUB+4.0/@50.4663598,30.508253,17z/data=!3m1!4b1!4m6!3m5!1s0x40d4ce6c8011bd9b:0xd60691de1458adbc!8m2!3d50.4663598!4d30.508253!16s%2Fg%2F11bwkj7qj1?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Кава, принтер, події'
       },
       {
         city: 'kyiv',
         name: 'Platforma Leonardo',
         image: 'https://static.wixstatic.com/media/09d8dc_3594a39862264187bc33050d4b89a20d~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/09d8dc_3594a39862264187bc33050d4b89a20d~mv2.jpg',
         desc: 'Сучасні робочі місця та креативна атмосфера.'
+        price: 450,
+        map: 'https://www.google.com.ua/maps/place/Coworking+Platforma+Leonardo/@50.4456575,30.5025423,15z/data=!3m1!4b1!4m6!3m5!1s0x40d4ce5802407267:0x5b296e9450093a05!8m2!3d50.445658!4d30.512842!16s%2Fg%2F11c718sqpc?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Лекційні зали, швидкий інтернет, кухня'
       },
       {
         city: 'kyiv',
         name: 'Lift99 Kyiv Hub',
         image: 'https://images.squarespace-cdn.com/content/v1/59e0ec65b1ffb652c49849db/1597655219312-I618LXCO5ZF7DKF5WXNR/lift99-kyiv-mriya-big.jpg',
         desc: 'Комʼюніті орієнтований простір для новаторів.'
+        price: 500,
+        map: 'https://www.google.com.ua/maps/place/LIFT99+Kyiv+Hub/@50.4326626,30.4997015,15z/data=!3m1!4b1!4m6!3m5!1s0x40d4cf5ef0cebd75:0x1a02dc5be6a6c0a0!8m2!3d50.4326631!4d30.5100012!16s%2Fg%2F11fd4xsfy8?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Лаунж зона, кухня, кондиціонер'
       },
       {
         city: 'lviv',
         name: 'IHub Lviv',
         image: 'https://ihub.ua/wp-content/uploads/2022/09/lv_ev_10-min-1920x706.jpg',
         desc: 'Затишний хаб у центрі Львова для айтішників.'
+        price: 550,
+        map: 'https://www.google.com.ua/maps/place/iHUB+Lviv/@49.8404433,24.0053723,15z/data=!3m1!4b1!4m6!3m5!1s0x473add76e1be56f1:0xc281a4e94106aa3e!8m2!3d49.8404438!4d24.015672!16s%2Fg%2F11bwpz9ftl?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Networking, кава, зона відпочинку, кухня'
       },
       {
         city: 'lviv',
         name: 'Startup Depot',
         image: 'https://coworking.lviv.ua/wp-content/uploads/2024/08/dsc_5334.jpeg',
         desc: 'Ідеальне місце для фрилансерів і команд.'
+        price: 500,
+        map: 'https://www.google.com.ua/maps/place/Startup+Depot+-+Coworking+%26+Business+Incubator/@49.8610769,24.0208697,15z/data=!3m1!4b1!4m6!3m5!1s0x473add0733d419a5:0x2d9691daa47340bf!8m2!3d49.8610774!4d24.0311694!16s%2Fg%2F11b6nlws1z?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Wi-Fi, кондиціонер, мітинг-рум, кухня'
       },
       {
         city: 'lviv',
         name: 'Communa',
         image: 'https://communa.net.ua/wp-content/uploads/2020/09/photo_2019-08-10_13-15-37.jpg',
         desc: 'Затишна атмосфера та арт-орієнтований простір.'
+        price: 550,
+        map: 'https://www.google.com.ua/maps/place/CoMMuna/@49.8338087,24.0062427,15z/data=!3m1!4b1!4m6!3m5!1s0x473add7b09c70d77:0x9b38bcdcd3525250!8m2!3d49.8338092!4d24.0165424!16s%2Fg%2F11c1p4s8vs?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Презентаційна зона, Wi-Fi, кава'
       },
       {
         city: 'lviv',
         name: 'Futura Hub',
         image: 'https://www.lvivconvention.com.ua/wp-content/uploads/2021/03/kholl-futury.jpg',
         desc: 'Інновації та креативність у кожному метрі.'
+        price: 450,
+        map: 'https://www.google.com.ua/maps/place/Futura+Hub/@49.8112633,23.9727583,15z/data=!3m1!4b1!4m6!3m5!1s0x473ae7fa6ef259ff:0xdc8f255834367bf0!8m2!3d49.8112638!4d23.983058!16s%2Fg%2F11hyt6kykt?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Арт-зона, кухня, Wi-Fi, принтер'
       },
       {
         city: 'odesa',
         name: 'Terminal 42',
         image: 'https://culturemeter.od.ua/wp-content/uploads/2020/03/XXL.jpg',
         desc: 'Сучасний простір біля моря з усім необхідним.'
+        price: 500,
+        map: 'https://www.google.com.ua/maps/place/Terminal+42/@46.4759941,30.7296871,15z/data=!3m1!4b1!4m6!3m5!1s0x40c6319c931220a7:0xa18eda5ce79c740c!8m2!3d46.4759946!4d30.7399868!16s%2Fg%2F11bv1v86t9?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Конференц-зал, кухня, Wi-Fi, open space'
       },
       {
         city: 'odesa',
         name: 'Impact Hub Odessa',
         image: 'https://impacthub.odessa.ua/wp-content/themes/impact/img/lvng-room.png',
         desc: 'Ідеальне місце для соціальних проєктів і стартапів.'
+        price: 500,
+        map: 'https://www.google.com.ua/maps/place/Impact+Hub+Odessa/@46.4816975,30.7368812,15z/data=!3m1!4b1!4m6!3m5!1s0x40c6319f69b7cfb1:0xd0dbf9009aa872c4!8m2!3d46.481698!4d30.7471809!16s%2Fg%2F1hjglh5lp?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Wi-Fi, кухня, події, зона для відпочинку'
       },
       {
         city: 'odesa',
         name: '4City',
         image: 'https://renty.ua/imgs/97c69c97faad50bfd29d4bd2a549de624b90f9d5906c29889d9a3ef18cf3ffa1',
         desc: 'Мультифункціональний простір із кафе та подіями.'
+        price: 450,
+        map: 'https://www.google.com.ua/maps/place/4City/@46.4782379,30.7379016,15z/data=!3m1!4b1!4m6!3m5!1s0x40c6319e16321031:0xc216effd0947985c!8m2!3d46.4782384!4d30.7482013!16s%2Fg%2F11g7z7m3hv?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Соціальні події, кухня, інтернет, проектор'
       },
       {
         city: 'odesa',
         name: 'Workit',
         image: 'https://www.coworkbooking.com/images/371!252/kapacita/19175/20210626_115555.jpg',
         desc: 'Сучасні офіси з гнучкими умовами для команд.'
+        price: 400,
+        map: 'https://www.google.com.ua/maps/search/Workit+odesa/@46.4574125,30.7110216,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Кафе, зона для виступів, Wi-Fi, туалет'
       },
       {
         city: 'kharkiv',
         name: 'Fabrika.space',
         image: 'https://fabrika.space/wp-content/uploads/2016/02/site-IMG_0018-2.jpg',
         desc: 'Один із найбільших просторів у Харкові з подієвим залом.'
+        price: 550,
+        map: 'https://www.google.com.ua/maps/place/Fabrika.space/@49.9894603,36.2120566,15z/data=!3m1!4b1!4m6!3m5!1s0x4127a0f9c7a6a7e3:0x9c90f7f9e6de783!8m2!3d49.9894608!4d36.2223563!16s%2Fg%2F11cnwns2ll?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Івент-хол, настільні ігри, бар'
       },
       {
         city: 'kharkiv',
         name: 'Spalah Kharkiv',
         image: 'https://lh6.googleusercontent.com/proxy/AnP8ingU4fYj0HJ3X8ESIVNIfcgNyp0n75y8ld4qJA8LoqkJHIn2JH9Fd6dRTW62rbE6Y0RWBNFTDiwJxy78n1gd5LgwOhhuedln6y_Vlnz7b4BlBvhqJCiwFJAqPfNjG2sgV-NllAoc2OzZ8urexZApiY2uAJM',
         desc: 'Комфортна атмосфера для навчання та роботи.'
+        price: 650,
+        map: 'https://www.google.com.ua/maps/place/Spalah+IT-school/@49.9935342,36.2296281,15z/data=!3m1!4b1!4m6!3m5!1s0x4127a11e4dd59613:0xa834f1578e16ad0b!8m2!3d49.9935347!4d36.2399278!16s%2Fg%2F1tdsh9vj?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Офіси, переговорки, кухня, інтернет'
       },
       {
         city: 'kharkiv',
         name: 'Coworking 365',
         image: 'https://coworking365.ua/wp-content/uploads/IMG_7815-860x575.jpg',
         desc: 'Гнучкий графік, багато світла, зручне розташування.'
+        price: 600,
+        map: 'https://www.google.com.ua/maps/place/COWORKING+365/@48.4402073,32.4037777,7z/data=!4m10!1m2!2m1!1sCOWORKING+365+kharkiv!3m6!1s0x40dbfd2bce6d54cb:0x335ad37d01c80547!8m2!3d48.4658624!4d35.0503703!15sChVDT1dPUktJTkcgMzY1IGtoYXJraXaSAQ9jb3dvcmtpbmdfc3BhY2XgAQA!16s%2Fg%2F11bbrk68gv?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Лаунж зона, кухня, кондиціонер'
       },
       {
         city: 'kharkiv',
         name: 'Smart Space',
         image: 'https://cdn.pragmatika.media/2025/02/Cluster-Space-07-02-2025-0-29-title.jpg',
         desc: 'Мінімалізм, фокус, технології — усе в одному.'
+        price: 550,
+        map: 'https://www.google.com.ua/maps/search/Smart+Space+kharkiv/@49.9885342,36.170592,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D',
+        features: 'Події, інтернет, кухня, переговорки'
       }
     ];
 
