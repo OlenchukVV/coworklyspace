@@ -1,4 +1,22 @@
 // js/window.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBWwKso4qEdRK1SnWHxawP7Zm49BwcZz50",
+  authDomain: "coworklyspace.firebaseapp.com",
+  projectId: "coworklyspace",
+  storageBucket: "coworklyspace.appspot.com",
+  messagingSenderId: "1039847178271",
+  appId: "1:1039847178271:web:9fbece3255c14b5217d52a",
+  databaseURL: "https://coworklyspace-default-rtdb.firebaseio.com/"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
 export function setupModal() {
   const modal = document.getElementById('modal');
   const closeBtn = modal.querySelector('.modal-close');
@@ -21,9 +39,7 @@ export function openModal(data) {
   const modalFeatures = document.getElementById('modalFeatures');
   const modalMap = document.getElementById('modalMap');
   const modalClose = document.querySelector('.modal-close');
-
-  // Додаємо ідентифікатор для кнопки бронювання
-  const bookButton = document.getElementById('reserveButton');  // Ось сюди
+  const bookButton = document.getElementById('reserveButton');
 
   modalTitle.textContent = data.name;
   modalDesc.textContent = data.desc;
@@ -32,8 +48,6 @@ export function openModal(data) {
   modalPrice.textContent = `${data.price} грн/день`;
   modalFeatures.textContent = data.features || 'Немає додаткових зручностей';
   modalMap.href = data.map || '#';
-
-  // Відкриття модального вікна
   modal.style.display = 'block';
 
   // Закриття модалки
@@ -43,7 +57,13 @@ export function openModal(data) {
   
   // Бронювання місця
   bookButton.onclick = function() {
-    const userId = firebase.auth().currentUser.uid; // Отримуємо ID користувача, якщо він автентифікований
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Будь ласка, увійдіть, щоб забронювати місце.");
+      return;
+    }
+
+    const userId = user.uid;
     const bookedSpace = {
       name: data.name,
       desc: data.desc,
@@ -51,17 +71,19 @@ export function openModal(data) {
       image: data.image,
       price: data.price,
       features: data.features,
-      map: data.map
+      map: data.map,
+      bookedAt: new Date().toISOString()
     };
 
-    // Додаємо інформацію до Firebase під унікальним ID користувача
-    firebase.database().ref('bookedSpaces/' + userId).push(bookedSpace)
+    const userBookingRef = ref(db, 'bookedSpaces/' + userId);
+
+    push(userBookingRef, bookedSpace)
       .then(() => {
         alert('Місце заброньовано!');
-        modal.style.display = 'none'; // Закриваємо модальне вікно
+        modal.style.display = 'none';
       })
       .catch((error) => {
-        console.error('Error booking space:', error);
+        console.error('Помилка при бронюванні:', error);
       });
   };
 }
