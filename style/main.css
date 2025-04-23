@@ -320,3 +320,12 @@ footer {
 .review-form-section button:hover {
   background-color: #0077cc;
 }
+    
+    .popular-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem 1rem 1rem;
+  text-align: center;
+  color: #222;
+}
+
