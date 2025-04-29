@@ -193,6 +193,15 @@ footer {
   margin: 0.25rem 0 0;
   color: #555;
 }
+
+.popular-title {
+    color: black !important;
+    background-color: yellow; /* Тимчасово, щоб бачити елемент */
+    border: 2px solid red; /* Також для тесту */
+    padding: 1rem;
+    font-size: 20px;
+}
+    
 .reviews-preview {
   text-align: center;
   margin: 4rem 0;
@@ -328,10 +337,3 @@ footer {
   background-color: #0077cc;
 }
 
-.popular-title {
-    color: black !important;
-    background-color: yellow; /* Тимчасово, щоб бачити елемент */
-    border: 2px solid red; /* Також для тесту */
-    padding: 1rem;
-    font-size: 20px;
-}
