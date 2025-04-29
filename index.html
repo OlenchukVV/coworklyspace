@@ -120,22 +120,8 @@
     </section>
 
     <h2 class="popular-title">Популярні простори</h2>
-    <section class="space-cards">
-        <div class="space-card" data-city="kyiv">
-            <div class="img-placeholder">Фото 1</div>
-            <h3>Freedom Hub</h3>
-            <p>Київ, Поділ – ⭐⭐⭐⭐☆</p>
-        </div>
-        <div class="space-card" data-city="lviv">
-            <div class="img-placeholder">Фото 2</div>
-            <h3>Smart Office</h3>
-            <p>Львів, Центр – ⭐⭐⭐⭐⭐</p>
-        </div>
-        <div class="space-card" data-city="odesa">
-            <div class="img-placeholder">Фото 3</div>
-            <h3>WorkClub</h3>
-            <p>Одеса, Аркадія – ⭐⭐⭐⭐☆</p>
-        </div>
+    <section class="space-cards" id="space-cards">
+        <!-- Тут будуть додаватися простори динамічно -->
     </section>
 
     <section class="reviews-preview">
@@ -168,27 +154,41 @@
         }
 
         const recommendedCity = localStorage.getItem('recommendedCity');
-        const cards = document.querySelectorAll('.space-card');
-        if (recommendedCity) {
-            let found = false;
-            cards.forEach(card => {
-                const city = card.dataset.city?.toLowerCase();
-                if (city === recommendedCity.toLowerCase()) {
-                    card.style.display = 'block';
-                    found = true;
+        const spaceCardsContainer = document.getElementById('space-cards');
+
+            // Ось ваші рекомендовані простори
+            const spaces = [
+                { name: 'Freedom Hub', city: 'Kyiv', location: 'Поділ', rating: '⭐⭐⭐⭐☆' },
+                { name: 'Smart Office', city: 'Lviv', location: 'Центр', rating: '⭐⭐⭐⭐⭐' },
+                { name: 'WorkClub', city: 'Odessa', location: 'Аркадія', rating: '⭐⭐⭐⭐☆' }
+            ];
+
+            if (recommendedCity) {
+                const recommendedSpaces = spaces.filter(space => space.city.toLowerCase() === recommendedCity.toLowerCase());
+
+                recommendedSpaces.forEach(space => {
+                    const spaceCard = document.createElement('div');
+                    spaceCard.classList.add('space-card');
+                    spaceCard.innerHTML = `
+                        <div class="img-placeholder">Фото</div>
+                        <h3>${space.name}</h3>
+                        <p>${space.city}, ${space.location} – ${space.rating}</p>
+                    `;
+                    spaceCardsContainer.appendChild(spaceCard);
+                });
+
+                if (recommendedSpaces.length > 0) {
+                    const title = document.querySelector('.popular-title');
+                    if (title) {
+                        title.textContent = `Рекомендовані простори у місті: ${recommendedCity}`;
+                    }
                 } else {
-                    card.style.display = 'none';
-                }
-            });
-            if (found) {
-                const title = document.querySelector('.popular-title');
-                if (title) {
-                    title.textContent = `Рекомендовані простори у місті: ${recommendedCity}`;
+                    spaceCardsContainer.innerHTML = '<p>Немає рекомендованих просторів для цього міста.</p>';
                 }
             }
-        }
-    });
+        });
     </script>
+
     <script type="module" src="./js/index-auth.js"></script>
 </body>
 </html>
