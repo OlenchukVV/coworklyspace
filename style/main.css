@@ -327,4 +327,14 @@ footer {
 .review-form-section button:hover {
   background-color: #0077cc;
 }
-    
+
+    .popular-title {
+    background-color: black;
+    color: black;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10;
+    border: 2px solid red;
+}
