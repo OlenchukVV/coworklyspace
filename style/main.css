@@ -331,7 +331,7 @@ footer {
 .popular-title {
     z-index: 10; /* Додає високий рівень на передній план */
     background-color: rgba(0, 0, 0, 0.6); /* Темний фон */
-    color: white; /* Білий текст */
+    color: black; /* Білий текст */
     padding: 10px;
     font-size: 24px;
     font-weight: bold;
