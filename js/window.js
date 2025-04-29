@@ -1,4 +1,3 @@
-// Функція для налаштування модального вікна
 export function setupModal() {
   const modal = document.getElementById('modal');
   const closeBtn = modal?.querySelector('.modal-close');
@@ -6,14 +5,17 @@ export function setupModal() {
   if (!modal || !closeBtn) return console.error('Не знайдено елементів для модального вікна');
 
   closeBtn.onclick = () => (modal.style.display = 'none');
+
+  // Клік поза модальним вікном закриває його
   window.onclick = (e) => {
-    if (e.target === modal) modal.style.display = 'none';
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
   };
 }
 
-// Функція для відкриття модального вікна з даними
 export function openModal(data) {
-  const getEl = id => document.getElementById(id);
+  const getEl = (id) => document.getElementById(id);
   const modal = getEl('modal');
 
   const elements = {
@@ -29,7 +31,7 @@ export function openModal(data) {
   };
 
   // Перевірка наявності всіх елементів
-  if (Object.values(elements).some(el => !el) || !modal) {
+  if (Object.values(elements).some((el) => !el) || !modal) {
     return console.error('Не знайдені необхідні елементи модального вікна');
   }
 
@@ -42,14 +44,15 @@ export function openModal(data) {
   elements.features.textContent = data.features || 'Немає додаткових зручностей';
   elements.map.href = data.map || '#';
 
-
   // Показати модальне вікно
   modal.style.display = 'block';
+
+  // Збереження міста в localStorage
   localStorage.setItem('recommendedCity', data.city);
 
   // Закриття по хрестику
   elements.closeBtn.onclick = () => (modal.style.display = 'none');
 }
 
-// Допоміжна функція: велика літера
+// Допоміжна функція для капіталізації першої літери
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
