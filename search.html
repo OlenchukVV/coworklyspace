@@ -217,30 +217,38 @@
       }
     ];
 
-    const list = document.getElementById('coworkingList');
     const cityFilter = document.getElementById('cityFilter');
+const featureFilter = document.getElementById('featureFilter');
 
-    function renderCoworkings(filter = 'all') {
-      list.innerHTML = '';
-      coworkings.filter(c => filter === 'all' || c.city === filter)
-        .forEach(c => {
-          const div = document.createElement('div');
-          div.className = 'space-card';
-          div.innerHTML = `
-            <img src="${c.image}" alt="${c.name}">
-            <h3>${c.name}</h3>
-            <p>${c.desc}</p>
-            <p><strong>Місто:</strong> ${c.city.charAt(0).toUpperCase() + c.city.slice(1)}</p>
-          `;
-          div.addEventListener('click', () => openModal(c)); // відкрити модальне вікно
-          list.appendChild(div);
-        });
-    }
+function renderCoworkings(city = 'all', feature = 'all') {
+  list.innerHTML = '';
+  coworkings
+    .filter(c => (city === 'all' || c.city === city))
+    .filter(c => (feature === 'all' || c.features.toLowerCase().includes(feature.toLowerCase())))
+    .forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'space-card';
+      div.innerHTML = `
+        <img src="${c.image}" alt="${c.name}">
+        <h3>${c.name}</h3>
+        <p>${c.desc}</p>
+        <p><strong>Місто:</strong> ${c.city.charAt(0).toUpperCase() + c.city.slice(1)}</p>
+      `;
+      div.addEventListener('click', () => openModal(c));
+      list.appendChild(div);
+    });
+}
 
-    cityFilter.addEventListener('change', () => renderCoworkings(cityFilter.value));
+cityFilter.addEventListener('change', () => {
+  renderCoworkings(cityFilter.value, featureFilter.value);
+});
 
-    renderCoworkings();
-    setupModal();
+featureFilter.addEventListener('change', () => {
+  renderCoworkings(cityFilter.value, featureFilter.value);
+});
+
+renderCoworkings();
+setupModal();
   </script>
 </body>
 </html>
