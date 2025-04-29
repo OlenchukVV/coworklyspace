@@ -45,6 +45,7 @@ export function openModal(data) {
 
   // Показати модальне вікно
   modal.style.display = 'block';
+  localStorage.setItem('recommendedCity', data.city);
 
   // Закриття по хрестику
   elements.closeBtn.onclick = () => (modal.style.display = 'none');
