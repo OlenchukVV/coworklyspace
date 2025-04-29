@@ -329,12 +329,9 @@ footer {
 }
     
 .popular-title {
-    z-index: 10; /* Додає високий рівень на передній план */
-    background-color: rgba(0, 0, 0, 0.6); /* Темний фон */
-    color: black; /* Білий текст */
-    padding: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    border-radius: 5px; /* Закруглені кути для фону */
+  background-color: #f8f9fa;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
 }
