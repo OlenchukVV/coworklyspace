@@ -121,17 +121,17 @@
 
     <h2 class="popular-title">Популярні простори</h2>
     <section class="space-cards">
-        <div class="space-card" data-city="Київ">
+        <div class="space-card" data-city="kyiv">
             <div class="img-placeholder">Фото 1</div>
             <h3>Freedom Hub</h3>
             <p>Київ, Поділ – ⭐⭐⭐⭐☆</p>
         </div>
-        <div class="space-card" data-city="Львів">
+        <div class="space-card" data-city="lviv">
             <div class="img-placeholder">Фото 2</div>
             <h3>Smart Office</h3>
             <p>Львів, Центр – ⭐⭐⭐⭐⭐</p>
         </div>
-        <div class="space-card" data-city="Одеса">
+        <div class="space-card" data-city="odesa">
             <div class="img-placeholder">Фото 3</div>
             <h3>WorkClub</h3>
             <p>Одеса, Аркадія – ⭐⭐⭐⭐☆</p>
@@ -167,7 +167,6 @@
             });
         }
 
-        // Рекомендації
         const recommendedCity = localStorage.getItem('recommendedCity');
         const cards = document.querySelectorAll('.space-card');
         if (recommendedCity) {
