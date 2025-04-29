@@ -195,11 +195,13 @@ footer {
 }
 
 .popular-title {
-    color: black !important;
-    background-color: yellow; /* Тимчасово, щоб бачити елемент */
-    border: 2px solid red; /* Також для тесту */
+    background-color: black;
+    color: white;
     padding: 1rem;
-    font-size: 20px;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10;
 }
     
 .reviews-preview {
