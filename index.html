@@ -6,13 +6,11 @@
     <title>CoworklySpace</title>
     <link rel="stylesheet" href="style/main.css" />
     <style>
-        /* Стиль для меню */
         .menu-container {
             position: relative;
             display: inline-block;
-            margin-left: 10px; /* Відступ ліворуч для кнопки меню */
+            margin-left: 10px;
         }
-
         .menu-button {
             font-size: 28px;
             background-color: transparent;
@@ -20,7 +18,6 @@
             color: #007bff;
             cursor: pointer;
         }
-
         .menu-content {
             display: none;
             position: absolute;
@@ -30,34 +27,26 @@
             z-index: 1;
             border-radius: 5px;
         }
-
         .menu-content a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
         }
-
         .menu-content a:hover {
             background-color: #ddd;
         }
-
         .menu-container:hover .menu-content {
             display: block;
         }
-
-        /* Тепер ці елементи не будуть зміщуватися */
         .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
         .nav-links, .auth-btn {
             margin-left: 20px;
         }
-
-        /* Стиль для кнопки "Напишіть відгук!" */
         .write-review-btn {
             position: fixed;
             bottom: 20px;
@@ -71,11 +60,9 @@
             cursor: pointer;
             z-index: 1000;
         }
-
         .write-review-btn:hover {
             background-color: #0056b3;
         }
-
     </style>
 </head>
 <body>
@@ -92,13 +79,13 @@
             </div>
             <div class="logo">Coworkly<span>Space</span></div>
             <nav class="nav-links">
-    <a href="about.html">Про нас</a>
-    <a href="search.html">Локації</a>
-    <a href="auth.html" id="loginLink">Увійти</a>
-    <a href="auth.html" id="registerLink">Реєстрація</a>
-    <a href="dashboard.html" id="dashboardLink" style="display: none;">Мій кабінет</a>
-    <button id="logoutBtn" style="display: none; background: none; border: none; color: red; cursor: pointer;">Вийти</button>
-           </nav>
+                <a href="about.html">Про нас</a>
+                <a href="search.html">Локації</a>
+                <a href="auth.html" id="loginLink">Увійти</a>
+                <a href="auth.html" id="registerLink">Реєстрація</a>
+                <a href="dashboard.html" id="dashboardLink" style="display: none;">Мій кабінет</a>
+                <button id="logoutBtn" style="display: none; background: none; border: none; color: red; cursor: pointer;">Вийти</button>
+            </nav>
         </div>
         <div class="hero-text">
             <h1>Готові працювати ефективніше?</h1>
@@ -109,7 +96,6 @@
 
     <section class="benefits">
         <h2>Чому обирають нас?</h2>
-
         <div class="benefit">
             <span class="icon">⚡</span>
             <div>
@@ -117,15 +103,13 @@
                 <p>Резервування робочих місць за 1 хвилину без дзвінків і менеджерів.</p>
             </div>
         </div>
-
         <div class="benefit">
             <span class="icon">🎯</span>
             <div>
-                <h2>Популярні простори</h2>
+                <h3>Популярні простори</h3>
                 <p>Алгоритми підбирають простір під ваш стиль роботи.</p>
             </div>
         </div>
-
         <div class="benefit">
             <span class="icon">📍</span>
             <div>
@@ -134,22 +118,19 @@
             </div>
         </div>
     </section>
-    
-<h2 class="popular-title">Популярні простори</h2>
 
-    <section class="space-cards popular-title">
+    <h2 class="popular-title">Популярні простори</h2>
+    <section class="space-cards">
         <div class="space-card" data-city="Київ">
             <div class="img-placeholder">Фото 1</div>
             <h3>Freedom Hub</h3>
             <p>Київ, Поділ – ⭐⭐⭐⭐☆</p>
         </div>
-
         <div class="space-card" data-city="Львів">
             <div class="img-placeholder">Фото 2</div>
             <h3>Smart Office</h3>
             <p>Львів, Центр – ⭐⭐⭐⭐⭐</p>
         </div>
-
         <div class="space-card" data-city="Одеса">
             <div class="img-placeholder">Фото 3</div>
             <h3>WorkClub</h3>
@@ -159,8 +140,7 @@
 
     <section class="reviews-preview">
         <h2>Що кажуть користувачі</h2>
-        <div class="reviews-grid" id="reviews-preview-list">
-        </div>
+        <div class="reviews-grid" id="reviews-preview-list"></div>
     </section>
 
     <footer>
@@ -170,53 +150,47 @@
     <button class="write-review-btn" onclick="window.location.href='reviews.html'">Напишіть відгук!</button>
 
     <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const reviewsPreviewList = document.getElementById("reviews-preview-list");
-
-            const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-            if (savedReviews.length === 0) {
-                reviewsPreviewList.innerHTML = "<p>Немає відгуків.</p>";
-            } else {
-                savedReviews.slice(0, 3).forEach((review) => {
-                    const reviewCard = document.createElement("div");
-                    reviewCard.classList.add("review-card");
-                    reviewCard.innerHTML = `
-                        <p>“${review.text}”</p>
-                        <span>- ${review.name}</span>
-                    `;
-                    reviewCard.addEventListener("click", () => {
-                        window.location.href = "reviews.html";
-                    });
-
-                    reviewsPreviewList.appendChild(reviewCard);
+    window.addEventListener("DOMContentLoaded", () => {
+        const reviewsPreviewList = document.getElementById("reviews-preview-list");
+        const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        if (savedReviews.length === 0) {
+            reviewsPreviewList.innerHTML = "<p>Немає відгуків.</p>";
+        } else {
+            savedReviews.slice(0, 3).forEach((review) => {
+                const reviewCard = document.createElement("div");
+                reviewCard.classList.add("review-card");
+                reviewCard.innerHTML = `<p>“${review.text}”</p><span>- ${review.name}</span>`;
+                reviewCard.addEventListener("click", () => {
+                    window.location.href = "reviews.html";
                 });
-            }
+                reviewsPreviewList.appendChild(reviewCard);
+            });
+        }
 
-            const recommendedCity = localStorage.getItem('recommendedCity');
-            const cards = document.querySelectorAll('.space-card');
-
-            if (recommendedCity) {
-                let found = false;
-                cards.forEach(card => {
-                    const city = card.dataset.city;
-                    if (city === recommendedCity) {
-                        card.style.display = 'block';
-                        found = true;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                if (found) {
-                    const title = document.querySelector('.popular-title');
-                    if (title) {
-                        title.textContent = `Рекомендовані простори у місті: ${recommendedCity}`;
-                    }
+        // Рекомендації
+        const recommendedCity = localStorage.getItem('recommendedCity');
+        const cards = document.querySelectorAll('.space-card');
+        if (recommendedCity) {
+            let found = false;
+            cards.forEach(card => {
+                const city = card.dataset.city?.toLowerCase();
+                if (city === recommendedCity.toLowerCase()) {
+                    card.style.display = 'block';
+                    found = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if (found) {
+                const title = document.querySelector('.popular-title');
+                if (title) {
+                    title.textContent = `Рекомендовані простори у місті: ${recommendedCity}`;
                 }
             }
-        });
+        }
+    });
     </script>
     <script type="module" src="./js/index-auth.js"></script>
 </body>
 </html>
+
