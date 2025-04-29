@@ -113,6 +113,13 @@ footer {
     transition: transform 0.3s ease;
 }
 
+.space-card-image img {
+    width: 100%;
+    height: 200px;  /* або іншу висоту */
+    object-fit: cover;  /* Це дозволить зберегти пропорції зображення */
+    border-radius: 8px;  /* М'які краї */
+}
+
 .space-card:hover {
     transform: translateY(-5px);
 }
