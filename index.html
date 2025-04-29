@@ -135,8 +135,7 @@
         </div>
     </section>
 
-    <section class="space-cards">
-        <!-- Місце для карток, що з'являються на основі рекомендованого міста -->
+    <<section class="space-cards">
         <div class="space-card" data-city="Київ">
             <div class="img-placeholder">Фото 1</div>
             <h3>Freedom Hub</h3>
@@ -159,7 +158,6 @@
     <section class="reviews-preview">
         <h2>Що кажуть користувачі</h2>
         <div class="reviews-grid" id="reviews-preview-list">
-            <!-- Відгуки завантажуватимуться тут -->
         </div>
     </section>
 
@@ -167,38 +165,32 @@
         <p>© 2025 CoworklySpace. Всі права захищено.</p>
     </footer>
 
-    <!-- Кнопка для написання відгуку -->
     <button class="write-review-btn" onclick="window.location.href='reviews.html'">Напишіть відгук!</button>
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             const reviewsPreviewList = document.getElementById("reviews-preview-list");
 
-            // Отримуємо збережені відгуки з localStorage
             const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-            // Якщо відгуків немає, вивести повідомлення
             if (savedReviews.length === 0) {
                 reviewsPreviewList.innerHTML = "<p>Немає відгуків.</p>";
             } else {
-                // Для кожного відгуку додаємо його на головну сторінку
-                savedReviews.slice(0, 3).forEach((review) => {  // Беремо лише перші 3 відгуки
+                savedReviews.slice(0, 3).forEach((review) => {
                     const reviewCard = document.createElement("div");
                     reviewCard.classList.add("review-card");
                     reviewCard.innerHTML = `
                         <p>“${review.text}”</p>
                         <span>- ${review.name}</span>
                     `;
-                    // Додаємо подію на клік, щоб при натисканні перенаправляло на сторінку додавання відгуку
                     reviewCard.addEventListener("click", () => {
-                        window.location.href = "reviews.html";  // Перенаправлення на сторінку додавання відгуку
+                        window.location.href = "reviews.html";
                     });
 
                     reviewsPreviewList.appendChild(reviewCard);
                 });
             }
 
-            // Рекомендаційна система для відображення карток за містом
             const recommendedCity = localStorage.getItem('recommendedCity');
             const cards = document.querySelectorAll('.space-card');
 
