@@ -328,13 +328,10 @@ footer {
   background-color: #0077cc;
 }
 
-    .popular-title {
-    background-color: black;
-    color: black;
+.popular-title {
+    color: black !important;
+    background-color: yellow; /* Тимчасово, щоб бачити елемент */
+    border: 2px solid red; /* Також для тесту */
     padding: 1rem;
-    font-size: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    z-index: 10;
-    border: 2px solid red;
+    font-size: 20px;
 }
