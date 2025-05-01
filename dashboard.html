@@ -69,12 +69,27 @@
     const list = document.getElementById("bookingList");
     const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
 
-    bookings.forEach(b => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.innerHTML = `<h3>📍 ${b.name}</h3><p>Дата: ${b.date}</p><p>Час: ${b.time}</p>`;
-      list.appendChild(div);
-    });
+    bookings.forEach((b, index) => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <h3>📍 ${b.name}</h3>
+    <p>Дата: ${b.date}</p>
+    <p>Час: ${b.time}</p>
+    <button class="delete-booking" data-index="${index}">Видалити</button>
+  `;
+  list.appendChild(div);
+});
+
+// Обробка видалення
+document.querySelectorAll(".delete-booking").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const index = e.target.getAttribute("data-index");
+    const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
+    bookings.splice(index, 1);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    location.reload(); // Перезавантажити сторінку для оновлення
+  });
   });
 </script>
 </body>
