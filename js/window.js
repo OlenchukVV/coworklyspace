@@ -52,6 +52,28 @@ export function openModal(data) {
 
   // Закриття по хрестику
   elements.closeBtn.onclick = () => (modal.style.display = 'none');
+  elements.bookBtn.onclick = () => {
+  const date = document.getElementById('bookingDate').value;
+  const time = document.getElementById('bookingTime').value;
+
+  if (!date || !time) {
+    alert("Оберіть дату та час");
+    return;
+  }
+
+  const booking = {
+    name: data.name,
+    date,
+    time,
+  };
+
+  const existing = JSON.parse(localStorage.getItem('bookings') || '[]');
+  existing.push(booking);
+  localStorage.setItem('bookings', JSON.stringify(existing));
+
+  alert("Бронювання збережено!");
+  modal.style.display = 'none';
+  };
 }
 
 // Допоміжна функція для капіталізації першої літери
