@@ -178,12 +178,15 @@
             const spaceCard = document.createElement('div');
             spaceCard.classList.add('space-card');
             spaceCard.innerHTML = `
-                <div class="space-card-image">
-                    <img src="${space.image}" alt="${space.name}" style="width: 100%; height: auto; border-radius: 8px;" />
-                </div>
-                <h3>${space.name}</h3>
-                <p>${space.city}, ${space.location} – ${space.rating}</p>
-            `;
+    <div class="space-card-image">
+        <img src="${space.image}" alt="${space.name}" style="width: 100%; height: auto; border-radius: 8px;" />
+    </div>
+    <h3>${space.name}</h3>
+    <p>${space.city}, ${space.location || ''} – ${space.rating}</p>
+    <div class="space-amenities">
+        ${space.amenities.map(a => `<span class="amenity">${a}</span>`).join(', ')}
+    </div>
+`;
             spaceCardsContainer.appendChild(spaceCard);
         });
 
